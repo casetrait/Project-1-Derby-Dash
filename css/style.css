@@ -55,20 +55,12 @@ th, td {
     grid-template-rows: 50px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px;
 }
 
-.race {
-    border: 1px white solid;
-}
-
-.fin {
-    background-color: white;
-}
-
 body {
     display: flex;
 }
 
 h1 {
-    grid-column: span 10;
+    grid-column: span 8;
 }
 
 .gate {
@@ -79,8 +71,13 @@ h1 {
     background-color: rgb(214, 56, 56);
 }
 
-#lastScratch {
-    padding-top: 40px;
+.fin {
+    background-image: url("../imgs/checkers.png");
+}
+
+.race {
+    text-align: center;
+    margin: auto;
 }
 
 
