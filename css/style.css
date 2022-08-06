@@ -1,0 +1,86 @@
+* {
+font-size: 22px;
+color: white;
+font-family: 'Poiret One', cursive;
+}
+
+body {
+    background-color: #290518;
+}
+
+.draw {
+    margin-top: 20px;
+    font-size: 40px;
+    background-color: rgb(150, 125, 51);
+}
+
+.roll {
+    font-size: 40px;
+    background-color: rgb(51, 150, 128);
+    padding: 0px 60px;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 2px white solid;
+    padding: 5px 15px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.left-content { 
+    width: 450px;
+    text-align: center;
+    padding: 40px;
+}
+
+#logo {
+    margin-top: -50px;
+    margin-left: -30px;
+}
+
+#message {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 25px;
+    text-align: center;
+}
+
+#lastCol {
+    width: 200px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 50px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px 70px;
+}
+
+.race {
+    border: 1px white solid;
+}
+
+.fin {
+    background-color: white;
+}
+
+body {
+    display: flex;
+}
+
+h1 {
+    grid-column: span 10;
+}
+
+.gate {
+    background-color: rgb(51, 150, 128);
+}
+
+.scratch {
+    background-color: rgb(214, 56, 56);
+}
+
+#lastScratch {
+    padding-top: 40px;
+}
+
+
