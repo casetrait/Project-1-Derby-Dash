@@ -18,7 +18,7 @@ body {
     font-size: 40px;
     background-color: rgb(51, 150, 128);
     padding: 0px 60px;
-    margin-top: 20px;
+    margin-top: 20px 0px 0px 0px;
 }
 
 th, td {
@@ -81,9 +81,4 @@ h1 {
     text-align: center;
     margin: auto;
 }
-
-#die1, #die2 {
-    display: inline;
-}
-
 

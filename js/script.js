@@ -117,6 +117,8 @@ let rollerMsg = document.getElementById("roller")
 let die1El = document.getElementById("die1")
 let die2El = document.getElementById("die2")
 let rolledHorseEl = document.getElementById("rolledHorse")
+let h2Image = document.getElementById("h2")
+let h2Scratch = document.getElementById("s2")
 
 
 /*----- event listeners -----*/
@@ -142,7 +144,7 @@ function drawHorses() {
 }
 
 function roll () {
-    if (raceStatus === "scratch" | "racing"){  
+    if (raceStatus === "scratch" || "racing"){  
     if (raceStatus === "scratch"){
         rollScratch()
       } else {
@@ -171,6 +173,8 @@ function rollScratch() {
     p4Holdings = p4Holdings - (p4Count[rolledHorse] * scratchValue)
     //increase pot by scratchValue * ScratchCount
     pot = pot + scratchValue * (p1Count[rolledHorse] + p2Count[rolledHorse] + p3Count[rolledHorse] + p4Count[rolledHorse])
+    moveToScratch(rolledHorse)
+    changeTurn()
     }
     if (scratchHorses.length === 4){
         raceStatus = "racing"
@@ -178,10 +182,20 @@ function rollScratch() {
     } else { return }
 }
 
+function moveToScratch(){
+    ///test works but check array method
+    h2Scratch.appendChild(h2Image)
+}
+
+function checkWinner(){
+    //check winner
+}
+
 function rollRace() {
     die1 = getRandomDieNum()
     die2 = getRandomDieNum()
     rolledHorse = die1 + die2
+    changeTurn()
 
     // raceStatus = "draw"
 }
@@ -275,8 +289,8 @@ function render() {
     p3HorsesDisplay.textContent = p3Horses
     p4HorsesDisplay.textContent = p4Horses
     messageEl.textContent = message
-    die1El.textContent = die1
-    die2El.textContent = die2
+    die1El.src = `imgs/${die1}d.png`
+    die2El.src = `imgs/${die2}d.png`
     rolledHorseEl.textContent = Number(die1) + Number(die2)
     //track
 }
@@ -289,3 +303,9 @@ function getRandomHorseNum() {
     return Math.floor(Math.random()*11 + 2)
 }
 
+function changeTurn () {
+    if (playerTurn === p1Name){playerTurn = p2Name}
+    else if (playerTurn === p2Name){playerTurn = p3Name}
+    else if (playerTurn === p3Name){playerTurn = p4Name}
+    else {playerTurn = p1Name}
+}
