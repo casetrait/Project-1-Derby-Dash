@@ -82,4 +82,8 @@ h1 {
     margin: auto;
 }
 
+#die1, #die2 {
+    display: inline;
+}
+
 

@@ -39,10 +39,10 @@
 
 /*----- constants -----*/
 
-const startHoldings = 10000
-const scratchValue = 200
+const startHoldings = 100
+const scratchValue = 2
 const startingPot = 0
-const maxWins = 30000
+const maxWins = startHoldings*3
 
 /*----- app's state (variables) -----*/
 
@@ -50,17 +50,13 @@ let p1Holdings
 let p2Holdings
 let p3Holdings
 let p4Holdings
-
 let p1Horses
 let p2Horses
 let p3Horses
 let p4Horses
-
 let die1
 let die2
-
 let pot
-
 let h2Position
 let h3Position
 let h4Position
@@ -72,14 +68,14 @@ let h9Position
 let h10Position
 let h11Position
 let h12Position
-
 let playerTurn
+let message
 
 /*----- cached element references -----*/
 
 let drawButton = document.querySelector(".draw")
 let rollButton = document.querySelector(".roll")
-let message = document.getElementById("message")
+let messageEl = document.getElementById("message")
 let p1HoldingsDisplay = document.getElementById("p1Holdings")
 let p2HoldingsDisplay = document.getElementById("p2Holdings")
 let p3HoldingsDisplay = document.getElementById("p3Holdings")
@@ -88,43 +84,35 @@ let p1HorsesDisplay = document.getElementById("p1Horses")
 let p2HorsesDisplay = document.getElementById("p2Horses")
 let p3HorsesDisplay = document.getElementById("p3Horses")
 let p4HorsesDisplay = document.getElementById("p4Horses")
-let p1Name = document.getElementById("p1Name")
-let p2Name = document.getElementById("p1Name")
-let p3Name = document.getElementById("p1Name")
-let p4Name = document.getElementById("p1Name")
+let p1NameDisplay = document.getElementById("p1Name")
+let p2NameDisplay = document.getElementById("p1Name")
+let p3NameDisplay = document.getElementById("p1Name")
+let p4NameDisplay = document.getElementById("p1Name")
+let currentPotMsg = document.getElementById("currentPot")
+let rollerMsg = document.getElementById("roller")
+let die1Roll = document.getElementById("die1")
+let die2Roll = document.getElementById("die2")
 
 /*----- event listeners -----*/
 
-drawButton.addEventListener("click", function(evt) {
-    drawHorses()
-})
-
-rollButton.addEventListener("click", function(evt) {
-    roll()
-    //if scratch pay scratch else
-    move()
-    //if horse moves to #fin space
-    raceWin()
-    //else
-    nextPlayer()
-})
+drawButton.addEventListener("click", drawHorses)
+rollButton.addEventListener("click", roll) 
 
 /*----- functions -----*/
 
+function drawHorses () {
+    console.log("draw horses")
+     //if game in process return else draw 6 random numbers between 1 and 12
+}
+
 function roll () {
     console.log("Roll")
-}
-
-function move () {
-    console.log("Move Horse")
-}
-
-function raceWin () {
-    console.log("I win!")
-}
-
-function nextPlayer () {
-    console.log("Next")
+    //roll die 1 and die 2
+    //if scratch pay scratch else
+    //move horse up one space
+    //if horse moves to #fin space
+    //win function
+    //else next player
 }
 
 function init () {
@@ -133,26 +121,51 @@ function init () {
     p2Holdings = startHoldings
     p3Holdings = startHoldings
     p4Holdings = startHoldings
+    p1Horses = 'Click "Draw Horses"'
+    p2Horses = 'Click "Draw Horses"'
+    p3Horses = 'Click "Draw Horses"'
+    p4Horses = 'Click "Draw Horses"'
     p1Name = "Player 1"
     p2Name = "Player 1"
     p3Name = "Player 1"
     p4Name = "Player 1"
     die1 = 1
-    die2 = 2
-    h2Position = "0"
-    h3Position = "0"
-    h4Position = "0"
-    h5Position = "0"
-    h6Position = "0"
-    h7Position = "0"
-    h8Position = "0"
-    h9Position = "0"
-    h10Position = "0"
-    h11Position = "0"
-    h12Position = "0"
+    die2 = 1
+    h2Position = ""//gate TBD
+    h3Position = ""//gate TBD
+    h4Position = ""//gate TBD
+    h5Position = ""//gate TBD
+    h6Position = ""//gate TBD
+    h7Position = ""//gate TBD
+    h8Position = ""//gate TBD
+    h9Position = ""//gate TBD
+    h10Position = ""//gate TBD
+    h11Position = ""//gate TBD
+    h12Position = ""//gate TBD
     playerTurn = p1Name
+    message = 'Click "Draw Horses" to begin'
+
+    render()
 }
 
-function drawHorses () {
-    console.log("draw horses")
+function render() {
+    //update DOM values
+    currentPotMsg.textContent = pot
+    rollerMsg.textContent = playerTurn
+    p1HoldingsDisplay.textContent = p1Holdings
+    p2HoldingsDisplay.textContent = p2Holdings
+    p3HoldingsDisplay.textContent = p3Holdings
+    p4HoldingsDisplay.textContent = p4Holdings
+    p1NameDisplay.textContent = p1Name
+    p2NameDisplay.textContent = p2Name
+    p3NameDisplay.textContent = p3Name
+    p4NameDisplay.textContent = p4Name
+    p1HorsesDisplay.textContent = p1Horses
+    p2HorsesDisplay.textContent = p2Horses
+    p3HorsesDisplay.textContent = p3Horses
+    p4HorsesDisplay.textContent = p4Horses
+    messageEl.textContent = message
+    die1Roll.textContent = die1
+    die1Roll.textContent = die1
+    //horses in gate
 }
