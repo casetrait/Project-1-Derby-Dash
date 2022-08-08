@@ -65,17 +65,21 @@ let p1Name = "Player 1"
 let p2Name = "Player 2"
 let p3Name = "Player 3"
 let p4Name = "Player 4"
-let p1Holdings = "100"
-let p2Holdings = "100"
-let p3Holdings = "100"
-let p4Holdings = "100"
+let pNames = [p1Name, p2Name, p3Name, p4Name]
+let p1Holdings = 100
+let p2Holdings = 100
+let p3Holdings = 100
+let p4Holdings = 100
 let p1Horses = []
 let p2Horses = []
 let p3Horses = []
 let p4Horses = []
-let die1 = "1"
-let die2 = "1"
-let pot = "0"
+let scratchHorses = []
+let die1 = 1
+let die2 = 1
+let rolledHorse
+let pot = 0
+let raceStatus = "draw"
 let track = []
 // TBD: does the track above replace the need for the below?
 // let h2Position
@@ -110,9 +114,9 @@ let p3NameDisplay = document.getElementById("p3Name")
 let p4NameDisplay = document.getElementById("p4Name")
 let currentPotMsg = document.getElementById("currentPot")
 let rollerMsg = document.getElementById("roller")
-let die1Roll = document.getElementById("die1")
-let die2Roll = document.getElementById("die2")
-
+let die1El = document.getElementById("die1")
+let die2El = document.getElementById("die2")
+let rolledHorseEl = document.getElementById("rolledHorse")
 
 
 /*----- event listeners -----*/
@@ -130,16 +134,93 @@ function drawHorses() {
             p3Horses.push(getRandomHorseNum())
             p4Horses.push(getRandomHorseNum())
             }
-            message = "Roll to Elect Scratched Horses!"
+            raceStatus = "scratch"
+            message = 'Click "Roll" to Elect Scratched Horses!'
+            countPlayerHorses()
             render()
-     } else {
-        return
-     }
+     } else { return }
 }
 
 function roll () {
-    console.log("roll")
+    if (raceStatus === "scratch" | "racing"){  
+    if (raceStatus === "scratch"){
+        rollScratch()
+      } else {
+        rollRace()
+      }
+    render()
+    }
+    else { return }
+}
 
+function rollScratch() {
+    die1 = getRandomDieNum()
+    die2 = getRandomDieNum()
+    rolledHorse = die1 + die2
+    if (scratchHorses.indexOf(rolledHorse) === -1){
+    scratchHorses.push(rolledHorse)
+    //converts undefined counts into 0 for purpose of math
+    p1Count[rolledHorse] = p1Count[rolledHorse] ? p1Count[rolledHorse] : 0
+    p2Count[rolledHorse] = p2Count[rolledHorse] ? p2Count[rolledHorse] : 0
+    p3Count[rolledHorse] = p3Count[rolledHorse] ? p3Count[rolledHorse] : 0
+    p4Count[rolledHorse] = p4Count[rolledHorse] ? p4Count[rolledHorse] : 0
+    //decrease player holdings by scratchValue * scratchCount
+    p1Holdings = p1Holdings - (p1Count[rolledHorse] * scratchValue)
+    p2Holdings = p2Holdings - (p2Count[rolledHorse] * scratchValue)
+    p3Holdings = p3Holdings - (p3Count[rolledHorse] * scratchValue)
+    p4Holdings = p4Holdings - (p4Count[rolledHorse] * scratchValue)
+    //increase pot by scratchValue * ScratchCount
+    pot = pot + scratchValue * (p1Count[rolledHorse] + p2Count[rolledHorse] + p3Count[rolledHorse] + p4Count[rolledHorse])
+    }
+    if (scratchHorses.length === 4){
+        raceStatus = "racing"
+        message = 'Click "Roll" to Race!'
+    } else { return }
+}
+
+function rollRace() {
+    die1 = getRandomDieNum()
+    die2 = getRandomDieNum()
+    rolledHorse = die1 + die2
+
+    // raceStatus = "draw"
+}
+
+const p1Count = {};
+const p2Count = {};
+const p3Count = {};
+const p4Count = {};
+
+function countPlayerHorses () {
+
+    for (const num of p1Horses) {
+        if (p1Count[num]){
+            p1Count[num] += 1
+        } else {
+            p1Count[num] = 1
+        }
+    }
+    for (const num of p2Horses) {
+        if (p2Count[num]){
+            p2Count[num] += 1
+        } else {
+            p2Count[num] = 1
+        }
+    }
+    for (const num of p3Horses) {
+        if (p3Count[num]){
+            p3Count[num] += 1
+        } else {
+            p3Count[num] = 1
+        }
+    }
+    for (const num of p4Horses) {
+        if (p4Count[num]){
+            p4Count[num] += 1
+        } else {
+            p4Count[num] = 1
+        }
+    }
 }
 
 function init () {
@@ -160,6 +241,7 @@ function init () {
     playerTurn = p1Name
     die1 = 1
     die2 = 1
+    raceStatus = "draw"
     track = startTrack
     // h2Position = ""//gate TBD
     // h3Position = ""//gate TBD
@@ -193,8 +275,9 @@ function render() {
     p3HorsesDisplay.textContent = p3Horses
     p4HorsesDisplay.textContent = p4Horses
     messageEl.textContent = message
-    die1Roll.textContent = die1
-    die2Roll.textContent = die2
+    die1El.textContent = die1
+    die2El.textContent = die2
+    rolledHorseEl.textContent = Number(die1) + Number(die2)
     //track
 }
 
