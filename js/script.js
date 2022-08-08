@@ -43,33 +43,53 @@ const startHoldings = 100
 const scratchValue = 2
 const startingPot = 0
 const maxWins = startHoldings*3
+const startTrack = [
+    [null,2,null,null,null,null,null,null,null,null],
+    [null,3,null,null,null,null,null,null,null,null],
+    [null,4,null,null,null,null,null,null,null,null],
+    [null,5,null,null,null,null,null,null,null,null],
+    [null,6,null,null,null,null,null,null,null,null],
+    [null,7,null,null,null,null,null,null,null,null],
+    [null,8,null,null,null,null,null,null,null,null],
+    [null,9,null,null,null,null,null,null,null,null],
+    [null,10,null,null,null,null,null,null,null,null],
+    [null,11,null,null,null,null,null,null,null,null],
+    [null,12,null,null,null,null,null,null,null,null]
+]
 
 /*----- app's state (variables) -----*/
 
-let p1Holdings
-let p2Holdings
-let p3Holdings
-let p4Holdings
-let p1Horses
-let p2Horses
-let p3Horses
-let p4Horses
-let die1
-let die2
-let pot
-let h2Position
-let h3Position
-let h4Position
-let h5Position
-let h6Position
-let h7Position
-let h8Position
-let h9Position
-let h10Position
-let h11Position
-let h12Position
-let playerTurn
-let message
+let playerTurn = "Player 1"
+let message = 'Click "Draw Horses" to Begin!'
+let p1Name = "Player 1"
+let p2Name = "Player 2"
+let p3Name = "Player 3"
+let p4Name = "Player 4"
+let p1Holdings = "100"
+let p2Holdings = "100"
+let p3Holdings = "100"
+let p4Holdings = "100"
+let p1Horses = []
+let p2Horses = []
+let p3Horses = []
+let p4Horses = []
+let die1 = "1"
+let die2 = "1"
+let pot = "0"
+let track = []
+// TBD: does the track above replace the need for the below?
+// let h2Position
+// let h3Position
+// let h4Position
+// let h5Position
+// let h6Position
+// let h7Position
+// let h8Position
+// let h9Position
+// let h10Position
+// let h11Position
+// let h12Position
+
 
 /*----- cached element references -----*/
 
@@ -85,13 +105,15 @@ let p2HorsesDisplay = document.getElementById("p2Horses")
 let p3HorsesDisplay = document.getElementById("p3Horses")
 let p4HorsesDisplay = document.getElementById("p4Horses")
 let p1NameDisplay = document.getElementById("p1Name")
-let p2NameDisplay = document.getElementById("p1Name")
-let p3NameDisplay = document.getElementById("p1Name")
-let p4NameDisplay = document.getElementById("p1Name")
+let p2NameDisplay = document.getElementById("p2Name")
+let p3NameDisplay = document.getElementById("p3Name")
+let p4NameDisplay = document.getElementById("p4Name")
 let currentPotMsg = document.getElementById("currentPot")
 let rollerMsg = document.getElementById("roller")
 let die1Roll = document.getElementById("die1")
 let die2Roll = document.getElementById("die2")
+
+
 
 /*----- event listeners -----*/
 
@@ -100,22 +122,28 @@ rollButton.addEventListener("click", roll)
 
 /*----- functions -----*/
 
-function drawHorses () {
-    console.log("draw horses")
-     //if game in process return else draw 6 random numbers between 1 and 12
+function drawHorses() {
+     if(message === 'Click "Draw Horses" to Begin!'){
+            for (let i=0; i<6; i++) {
+            p1Horses.push(getRandomHorseNum())
+            p2Horses.push(getRandomHorseNum())
+            p3Horses.push(getRandomHorseNum())
+            p4Horses.push(getRandomHorseNum())
+            }
+            message = "Roll to Elect Scratched Horses!"
+            render()
+     } else {
+        return
+     }
 }
 
 function roll () {
-    console.log("Roll")
-    //roll die 1 and die 2
-    //if scratch pay scratch else
-    //move horse up one space
-    //if horse moves to #fin space
-    //win function
-    //else next player
+    console.log("roll")
+
 }
 
 function init () {
+    message = 'Click "Draw Horses" to Begin!'
     pot = startingPot
     p1Holdings = startHoldings
     p2Holdings = startHoldings
@@ -126,36 +154,36 @@ function init () {
     p3Horses = 'Click "Draw Horses"'
     p4Horses = 'Click "Draw Horses"'
     p1Name = "Player 1"
-    p2Name = "Player 1"
-    p3Name = "Player 1"
-    p4Name = "Player 1"
+    p2Name = "Player 2"
+    p3Name = "Player 3"
+    p4Name = "Player 4"
+    playerTurn = p1Name
     die1 = 1
     die2 = 1
-    h2Position = ""//gate TBD
-    h3Position = ""//gate TBD
-    h4Position = ""//gate TBD
-    h5Position = ""//gate TBD
-    h6Position = ""//gate TBD
-    h7Position = ""//gate TBD
-    h8Position = ""//gate TBD
-    h9Position = ""//gate TBD
-    h10Position = ""//gate TBD
-    h11Position = ""//gate TBD
-    h12Position = ""//gate TBD
-    playerTurn = p1Name
-    message = 'Click "Draw Horses" to begin'
+    track = startTrack
+    // h2Position = ""//gate TBD
+    // h3Position = ""//gate TBD
+    // h4Position = ""//gate TBD
+    // h5Position = ""//gate TBD
+    // h6Position = ""//gate TBD
+    // h7Position = ""//gate TBD
+    // h8Position = ""//gate TBD
+    // h9Position = ""//gate TBD
+    // h10Position = ""//gate TBD
+    // h11Position = ""//gate TBD
+    // h12Position = ""//gate TBD
 
     render()
 }
 
 function render() {
     //update DOM values
-    currentPotMsg.textContent = pot
-    rollerMsg.textContent = playerTurn
-    p1HoldingsDisplay.textContent = p1Holdings
-    p2HoldingsDisplay.textContent = p2Holdings
-    p3HoldingsDisplay.textContent = p3Holdings
-    p4HoldingsDisplay.textContent = p4Holdings
+    currentPotMsg.textContent = `Current Pot: $ ${pot}`
+    rollerMsg.textContent = `Roller: ${playerTurn}`
+    p1HoldingsDisplay.textContent = `$ ${p1Holdings}`
+    p2HoldingsDisplay.textContent = `$ ${p2Holdings}`
+    p3HoldingsDisplay.textContent = `$ ${p3Holdings}`
+    p4HoldingsDisplay.textContent = `$ ${p4Holdings}`
     p1NameDisplay.textContent = p1Name
     p2NameDisplay.textContent = p2Name
     p3NameDisplay.textContent = p3Name
@@ -166,6 +194,15 @@ function render() {
     p4HorsesDisplay.textContent = p4Horses
     messageEl.textContent = message
     die1Roll.textContent = die1
-    die1Roll.textContent = die1
-    //horses in gate
+    die2Roll.textContent = die2
+    //track
 }
+
+function getRandomDieNum() {
+    return Math.floor(Math.random()*6 + 1)
+}
+
+function getRandomHorseNum() {
+    return Math.floor(Math.random()*11 + 2)
+}
+
