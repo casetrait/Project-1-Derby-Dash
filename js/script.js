@@ -35,3 +35,111 @@
     
 // TBD: At each scratch penalty payment event we must check for players holding value dropping is less than or equal to $0
 //         This could trigger elimination from the game. Alternatively, we may allow players to plunge into negative values (bank loan anyone?)
+
+
+/*----- constants -----*/
+
+let startHoldings = 10000
+let scratchValue = 200
+let startingPot = 0
+
+/*----- app's state (variables) -----*/
+
+let p1Holdings = ""
+let p2Holdings = ""
+let p3Holdings = ""
+let p4Holdings = ""
+
+let p1name = ""
+let p2name = ""
+let p3name = ""
+let p4name = ""
+
+let die1 = ""
+let die2 = ""
+
+let pot = ""
+
+let h2Position = ""
+let h3Position = ""
+let h4Position = ""
+let h5Position = ""
+let h6Position = ""
+let h7Position = ""
+let h8Position = ""
+let h9Position = ""
+let h10Position = ""
+let h11Position = ""
+let h12Position = ""
+
+let playerTurn = ""
+
+/*----- cached element references -----*/
+
+let drawButton = document.querySelector(".draw")
+let rollButton = document.querySelector(".roll")
+
+/*----- event listeners -----*/
+
+drawButton.addEventListener("click", function(evt) {
+    drawHorses()
+})
+
+rollButton.addEventListener("click", function(evt) {
+    roll()
+    //if scratch pay scratch else
+    move()
+    //if horse moves to #fin space
+    raceWin()
+    //else
+    nextPlayer()
+})
+
+/*----- functions -----*/
+
+function roll () {
+    console.log("Roll")
+}
+
+function move () {
+    console.log("Move Horse")
+}
+
+function raceWin () {
+    console.log("I win!")
+}
+
+function nextPlayer () {
+    console.log("Next")
+}
+
+function init () {
+    pot = startingPot
+    p1Holdings = startHoldings
+    p2Holdings = startHoldings
+    p3Holdings = startHoldings
+    p4Holdings = startHoldings
+    p1Name = "Player 1"
+    p2Name = "Player 1"
+    p3Name = "Player 1"
+    p4Name = "Player 1"
+    die1 = 1
+    die2 = 2
+    h2Position = "0"
+    h3Position = "0"
+    h4Position = "0"
+    h5Position = "0"
+    h6Position = "0"
+    h7Position = "0"
+    h8Position = "0"
+    h9Position = "0"
+    h10Position = "0"
+    h11Position = "0"
+    h12Position = "0"
+    playerTurn = //Player 1
+
+}
+
+function drawHorses () {
+    console.log("draw horses")
+}
