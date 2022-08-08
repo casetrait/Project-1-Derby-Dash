@@ -22,7 +22,7 @@ body {
 }
 
 th, td {
-    border: 2px white solid;
+    border: 2px solid white;
     padding: 5px 15px;
     text-align: center;
     font-size: 17px;
@@ -56,7 +56,7 @@ th, td {
     max-width: 1050px;
 }
 
-body {
+main {
     display: flex;
 }
 

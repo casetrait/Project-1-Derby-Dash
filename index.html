@@ -12,171 +12,172 @@
     <script defer src="js/script.js"></script>
 </head>
 <body>
-    <div class="left-content">
-        <img ID="logo" src="imgs/logo.png" alt="Derby Dash Logo" width="380">
-        <table>
-            <tr>
-              <th>Name</th>
-              <th>Holdings</th>
-              <th ID="lastCol">Horses</th>
-            </tr>
-            <tr>
-              <td>Player 1</td>
-              <td>$10,000</td>
-              <td>Click "Draw Horses"</td>
-            </tr>
-            <tr>
-                <td>Player 2</td>
-                <td>$10,000</td>
-                <td>Click "Draw Horses"</td>
-            </tr>
-            <tr>
-                <td>Player 3</td>
-                <td>$10,000</td>
-                <td>Click "Draw Horses"</td>
-              </tr>
-              <tr>
-                  <td>Player 4</td>
-                  <td>$10,000</td>
-                  <td>Click "Draw Horses"</td>
-              </tr>
-          </table>
-        <button class="draw">DRAW HORSES</button>
-        <p>Current Pot: <strong ID ="pot">$0</strong></p>
-        <p>Next Roller: <strong ID ="roller">Player 1</strong></p>
-        <div ID = "dice">
-            <img ID="d1" src="imgs/1d.png" height="100">
-            <img ID ="d2" src="imgs/2d.png" height="100">
+    <main>
+        <div class="left-content">
+            <img ID="logo" src="imgs/logo.png" alt="Derby Dash Logo" width="380">
+            <table>
+                <tr>
+                <th>Name</th>
+                <th>Holdings</th>
+                <th ID="lastCol">Horses</th>
+                </tr>
+                <tr>
+                <td ID="p1Name">Player 1</td>
+                <td ID="p1Holdings">$10,000</td>
+                <td ID="p1Horses">Click "Draw Horses"</td>
+                </tr>
+                <tr>
+                    <td ID="p2Name">Player 2</td>
+                    <td ID="p2Holdings">$10,000</td>
+                    <td ID="p2Horses">Click "Draw Horses"</td>
+                </tr>
+                <tr>
+                    <td ID="p3Name">Player 3</td>
+                    <td ID="p3Holdings">$10,000</td>
+                    <td ID="p3Horses">Click "Draw Horses"</td>
+                </tr>
+                <tr>
+                    <td ID="p4Name">Player 4</td>
+                    <td ID="p4Holdings">$10,000</td>
+                    <td ID="p4Horses">Click "Draw Horses"</td>
+                </tr>
+            </table>
+            <button class="draw">DRAW HORSES</button>
+            <p>Current Pot: <strong ID ="pot">$0</strong></p>
+            <p>Next Roller: <strong ID ="roller">Player 1</strong></p>
+            <div ID = "dice">
+                <img ID="d1" src="imgs/1d.png" height="100">
+                <img ID ="d2" src="imgs/2d.png" height="100">
+            </div>
+            <button class="roll">ROLL</button>
         </div>
-        <button class="roll">ROLL</button>
-    </div>
-    <div class="board">
-        <p>Scratch</p>
-        <p>Gate</p>
-        <h1 ID="message">Click Draw Horses to Begin!</h1> 
+        <div class="board">
+            <p>Scratch</p>
+            <p>Gate</p>
+            <h1 ID="message">Click Draw Horses to Begin!</h1> 
 
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/2h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin" ID="fin1"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/2h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin" ID="fin1"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
 
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/3h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-                
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/4h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-                
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/5h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-                
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/6h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-        <div class="dead"></div>
-                
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/7h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-                
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/8h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-        <div class="dead"></div>
-                
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/9h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-                
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/10h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-                
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/11h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/3h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+                    
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/4h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+                    
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/5h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+                    
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/6h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+            <div class="dead"></div>
+                    
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/7h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+                    
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/8h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+            <div class="dead"></div>
+                    
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/9h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+                    
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/10h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+                    
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/11h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
 
-        <div class="scratch"></div>
-        <div class="gate"><img src="imgs/12h.png" height="60"></div>
-        <div class="race">&bull;</div>
-        <div class="race">&bull;</div>
-        <div class="fin"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-        <div class="dead"></div>
-    </div>
-
+            <div class="scratch"></div>
+            <div class="gate"><img src="imgs/12h.png" height="60"></div>
+            <div class="race">&bull;</div>
+            <div class="race">&bull;</div>
+            <div class="fin"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+            <div class="dead"></div>
+        </div>
+    </main>
 </body>
 </html>
 

@@ -39,45 +39,59 @@
 
 /*----- constants -----*/
 
-let startHoldings = 10000
-let scratchValue = 200
-let startingPot = 0
+const startHoldings = 10000
+const scratchValue = 200
+const startingPot = 0
+const maxWins = 30000
 
 /*----- app's state (variables) -----*/
 
-let p1Holdings = ""
-let p2Holdings = ""
-let p3Holdings = ""
-let p4Holdings = ""
+let p1Holdings
+let p2Holdings
+let p3Holdings
+let p4Holdings
 
-let p1name = ""
-let p2name = ""
-let p3name = ""
-let p4name = ""
+let p1Horses
+let p2Horses
+let p3Horses
+let p4Horses
 
-let die1 = ""
-let die2 = ""
+let die1
+let die2
 
-let pot = ""
+let pot
 
-let h2Position = ""
-let h3Position = ""
-let h4Position = ""
-let h5Position = ""
-let h6Position = ""
-let h7Position = ""
-let h8Position = ""
-let h9Position = ""
-let h10Position = ""
-let h11Position = ""
-let h12Position = ""
+let h2Position
+let h3Position
+let h4Position
+let h5Position
+let h6Position
+let h7Position
+let h8Position
+let h9Position
+let h10Position
+let h11Position
+let h12Position
 
-let playerTurn = ""
+let playerTurn
 
 /*----- cached element references -----*/
 
 let drawButton = document.querySelector(".draw")
 let rollButton = document.querySelector(".roll")
+let message = document.getElementById("message")
+let p1HoldingsDisplay = document.getElementById("p1Holdings")
+let p2HoldingsDisplay = document.getElementById("p2Holdings")
+let p3HoldingsDisplay = document.getElementById("p3Holdings")
+let p4HoldingsDisplay = document.getElementById("p4Holdings")
+let p1HorsesDisplay = document.getElementById("p1Horses")
+let p2HorsesDisplay = document.getElementById("p2Horses")
+let p3HorsesDisplay = document.getElementById("p3Horses")
+let p4HorsesDisplay = document.getElementById("p4Horses")
+let p1Name = document.getElementById("p1Name")
+let p2Name = document.getElementById("p1Name")
+let p3Name = document.getElementById("p1Name")
+let p4Name = document.getElementById("p1Name")
 
 /*----- event listeners -----*/
 
@@ -136,8 +150,7 @@ function init () {
     h10Position = "0"
     h11Position = "0"
     h12Position = "0"
-    playerTurn = //Player 1
-
+    playerTurn = p1Name
 }
 
 function drawHorses () {
