@@ -175,6 +175,8 @@ function rollRace() {
         if (squareTarget.classList.contains("fin")){
             squareTarget.style.backgroundImage= 'url("")'
             squareTarget.style.backgroundColor = "green"
+            setTimeout(resetHorses, 3000)
+            setTimeout(function(){squareTarget.style.backgroundImage = "url('imgs/checkers.png')"},3000)
         } else { return }
     }
     changeTurn()
@@ -280,12 +282,12 @@ function resetHorses() {
     squareTarget.appendChild(horseTarget)
     }
     resetBorderStyling()
-    messageEl.textContent = 'Click "Draw Horses" to Begin Next Race!'
+    message = 'Click "Draw Horses" to Begin Next Race!'
     raceStatus = "draw"
-    p1HorsesDisplay.textContent = 'Draw Horses'
-    p2HorsesDisplay.textContent = 'Draw Horses'
-    p3HorsesDisplay.textContent = 'Draw Horses'
-    p4HorsesDisplay.textContent = 'Draw Horses'
+    p1Horses = 'Draw Horses'
+    p2Horses = 'Draw Horses'
+    p3Horses = 'Draw Horses'
+    p4Horses = 'Draw Horses'
 }
 
 function resetBorderStyling() {
