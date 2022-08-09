@@ -8,6 +8,10 @@ body {
     background-color: #290518;
 }
 
+p {
+    text-align: center;
+}
+
 .draw {
     margin-top: 20px;
     font-size: 40px;
@@ -45,10 +49,6 @@ th, td {
     text-align: center;
 }
 
-#lastCol {
-    width: 200px;
-}
-
 .board {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -80,5 +80,9 @@ h1 {
     font-size: 50px;
     text-align: center;
     margin: auto;
+}
+
+table {
+    margin: 0 auto;
 }
 
