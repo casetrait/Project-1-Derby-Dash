@@ -43,19 +43,19 @@ const startHoldings = 100
 const scratchValue = 2
 const startingPot = 0
 const maxWins = startHoldings*3
-const startTrack = [
-    [null,2,null,null,null,null,null,null,null,null],
-    [null,3,null,null,null,null,null,null,null,null],
-    [null,4,null,null,null,null,null,null,null,null],
-    [null,5,null,null,null,null,null,null,null,null],
-    [null,6,null,null,null,null,null,null,null,null],
-    [null,7,null,null,null,null,null,null,null,null],
-    [null,8,null,null,null,null,null,null,null,null],
-    [null,9,null,null,null,null,null,null,null,null],
-    [null,10,null,null,null,null,null,null,null,null],
-    [null,11,null,null,null,null,null,null,null,null],
-    [null,12,null,null,null,null,null,null,null,null]
-]
+// const startTrack = [
+//     [null,h2,null,null,null,null,null,null,null,null],
+//     [null,h3,null,null,null,null,null,null,null,null],
+//     [null,h4,null,null,null,null,null,null,null,null],
+//     [null,h5,null,null,null,null,null,null,null,null],
+//     [null,h6,null,null,null,null,null,null,null,null],
+//     [null,h7,null,null,null,null,null,null,null,null],
+//     [null,h8,null,null,null,null,null,null,null,null],
+//     [null,h9,null,null,null,null,null,null,null,null],
+//     [null,h10,null,null,null,null,null,null,null,null],
+//     [null,h11,null,null,null,null,null,null,null,null],
+//     [null,h12,null,null,null,null,null,null,null,null]
+// ]
 
 /*----- app's state (variables) -----*/
 
@@ -65,7 +65,6 @@ let p1Name = "Player 1"
 let p2Name = "Player 2"
 let p3Name = "Player 3"
 let p4Name = "Player 4"
-let pNames = [p1Name, p2Name, p3Name, p4Name]
 let p1Holdings = 100
 let p2Holdings = 100
 let p3Holdings = 100
@@ -80,7 +79,9 @@ let die2 = 1
 let rolledHorse
 let pot = 0
 let raceStatus = "draw"
-let track = []
+// let horseTarget
+// let squareTarget
+// let track = []
 // TBD: does the track above replace the need for the below?
 // let h2Position
 // let h3Position
@@ -117,8 +118,7 @@ let rollerMsg = document.getElementById("roller")
 let die1El = document.getElementById("die1")
 let die2El = document.getElementById("die2")
 let rolledHorseEl = document.getElementById("rolledHorse")
-let h2Image = document.getElementById("h2")
-let h2Scratch = document.getElementById("s2")
+
 
 
 /*----- event listeners -----*/
@@ -129,7 +129,7 @@ rollButton.addEventListener("click", roll)
 /*----- functions -----*/
 
 function drawHorses() {
-     if(message === 'Click "Draw Horses" to Begin!'){
+     if(raceStatus === "draw"){
             for (let i=0; i<6; i++) {
             p1Horses.push(getRandomHorseNum())
             p2Horses.push(getRandomHorseNum())
@@ -160,35 +160,29 @@ function rollScratch() {
     die2 = getRandomDieNum()
     rolledHorse = die1 + die2
     if (scratchHorses.indexOf(rolledHorse) === -1){
-    scratchHorses.push(rolledHorse)
-    //converts undefined counts into 0 for purpose of math
-    p1Count[rolledHorse] = p1Count[rolledHorse] ? p1Count[rolledHorse] : 0
-    p2Count[rolledHorse] = p2Count[rolledHorse] ? p2Count[rolledHorse] : 0
-    p3Count[rolledHorse] = p3Count[rolledHorse] ? p3Count[rolledHorse] : 0
-    p4Count[rolledHorse] = p4Count[rolledHorse] ? p4Count[rolledHorse] : 0
-    //decrease player holdings by scratchValue * scratchCount
-    p1Holdings = p1Holdings - (p1Count[rolledHorse] * scratchValue)
-    p2Holdings = p2Holdings - (p2Count[rolledHorse] * scratchValue)
-    p3Holdings = p3Holdings - (p3Count[rolledHorse] * scratchValue)
-    p4Holdings = p4Holdings - (p4Count[rolledHorse] * scratchValue)
-    //increase pot by scratchValue * ScratchCount
-    pot = pot + scratchValue * (p1Count[rolledHorse] + p2Count[rolledHorse] + p3Count[rolledHorse] + p4Count[rolledHorse])
-    moveToScratch(rolledHorse)
-    changeTurn()
-    }
-    if (scratchHorses.length === 4){
+        scratchHorses.push(rolledHorse)
+        //converts undefined counts into 0 for purpose of math
+        p1Count[rolledHorse] = p1Count[rolledHorse] ? p1Count[rolledHorse] : 0
+        p2Count[rolledHorse] = p2Count[rolledHorse] ? p2Count[rolledHorse] : 0
+        p3Count[rolledHorse] = p3Count[rolledHorse] ? p3Count[rolledHorse] : 0
+        p4Count[rolledHorse] = p4Count[rolledHorse] ? p4Count[rolledHorse] : 0
+        //decrease player holdings by scratchValue * scratchCount
+        p1Holdings = p1Holdings - (p1Count[rolledHorse] * scratchValue)
+        p2Holdings = p2Holdings - (p2Count[rolledHorse] * scratchValue)
+        p3Holdings = p3Holdings - (p3Count[rolledHorse] * scratchValue)
+        p4Holdings = p4Holdings - (p4Count[rolledHorse] * scratchValue)
+        //increase pot by scratchValue * ScratchCount
+        pot = pot + scratchValue * (p1Count[rolledHorse] + p2Count[rolledHorse] + p3Count[rolledHorse] + p4Count[rolledHorse])
+        //find target classes for squaree and horse to move scratched horses into scratch row
+        let horseTarget = document.getElementById("h" + rolledHorse)
+        let squareTarget = document.getElementById("s" + rolledHorse)
+        squareTarget.appendChild(horseTarget)
+        changeTurn()
+    } else { return }
+    if (scratchHorses.length === 4) {      
         raceStatus = "racing"
         message = 'Click "Roll" to Race!'
     } else { return }
-}
-
-function moveToScratch(){
-    ///test works but check array method
-    h2Scratch.appendChild(h2Image)
-}
-
-function checkWinner(){
-    //check winner
 }
 
 function rollRace() {
@@ -197,7 +191,7 @@ function rollRace() {
     rolledHorse = die1 + die2
     changeTurn()
 
-    // raceStatus = "draw"
+    // raceWinEvent function including pot split and set raceStatus = "draw"
 }
 
 const p1Count = {};
@@ -308,4 +302,8 @@ function changeTurn () {
     else if (playerTurn === p2Name){playerTurn = p3Name}
     else if (playerTurn === p3Name){playerTurn = p4Name}
     else {playerTurn = p1Name}
+}
+
+function checkWinner(){
+    //check winner
 }
