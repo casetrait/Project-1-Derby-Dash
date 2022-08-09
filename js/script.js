@@ -66,6 +66,10 @@ let die2 = 1
 let rolledHorse
 let pot = 0
 let raceStatus = "draw"
+const p1Count = {};
+const p2Count = {};
+const p3Count = {};
+const p4Count = {};
 
 
 /*----- cached element references -----*/
@@ -163,7 +167,9 @@ function rollRace() {
         console.log("scratch!")
     } else {
         let horseTarget = document.getElementById("h" + rolledHorse)
-        let squareTarget = document.getElementById("1r" + rolledHorse)
+        let currentColumn = horseTarget.parentNode.id.charAt(0)
+        let nextColumn = Number(currentColumn) + 1
+        let squareTarget = document.getElementById(nextColumn + "r" + rolledHorse)
         squareTarget.style.border = "none"
         squareTarget.appendChild(horseTarget)
     }
@@ -172,10 +178,6 @@ function rollRace() {
     // if horse parent class==="fin" raceWinEvent function including pot split and set raceStatus = "draw"
 }
 
-const p1Count = {};
-const p2Count = {};
-const p3Count = {};
-const p4Count = {};
 
 function countPlayerHorses () {
 
