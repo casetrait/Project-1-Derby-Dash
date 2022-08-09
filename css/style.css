@@ -79,6 +79,11 @@ h1 {
 .race {
     font-size: 40px;
     margin: auto;
+    border: 5px solid white;
+}
+
+em {
+    font-style: normal;
 }
 
 

@@ -91,8 +91,6 @@ let die1El = document.getElementById("die1")
 let die2El = document.getElementById("die2")
 let rolledHorseEl = document.getElementById("rolledHorse")
 
-
-
 /*----- event listeners -----*/
 
 drawButton.addEventListener("click", drawHorses)
@@ -166,7 +164,7 @@ function rollRace() {
     } else {
         let horseTarget = document.getElementById("h" + rolledHorse)
         let squareTarget = document.getElementById("1r" + rolledHorse)
-        squareTarget.textContent=""
+        squareTarget.style.border = "none"
         squareTarget.appendChild(horseTarget)
     }
     changeTurn()
@@ -277,7 +275,23 @@ function checkWinner(){
 function resetHorses() {
     for (let i=2; i<13; i++) {
     let horseTarget = document.getElementById("h" + i)
-    let squareTarget = document.getElementById("g" + i)
+    let squareTarget = document.getElementById("0r" + i)
     squareTarget.appendChild(horseTarget)
+    }
+    resetBorderStyling()
+    messageEl.textContent = 'Click "Draw Horses" to Begin Next Race!'
+    raceStatus = "draw"
+    p1HorsesDisplay.textContent = 'Click "Draw Horses"'
+    p2HorsesDisplay.textContent = 'Click "Draw Horses"'
+    p3HorsesDisplay.textContent = 'Click "Draw Horses"'
+    p4HorsesDisplay.textContent = 'Click "Draw Horses"'
+}
+
+function resetBorderStyling() {
+    let raceSquares = document.getElementsByClassName("race")
+
+    for (let i=0; i < raceSquares.length; i++) {
+        let raceSquare = raceSquares[i];
+        raceSquare.style.border = "5px solid white"
     }
 }
