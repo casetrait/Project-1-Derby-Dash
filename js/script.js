@@ -172,6 +172,10 @@ function rollRace() {
         let squareTarget = document.getElementById(nextColumn + "r" + rolledHorse)
         squareTarget.style.border = "none"
         squareTarget.appendChild(horseTarget)
+        if (squareTarget.classList.contains("fin")){
+            squareTarget.style.backgroundImage= 'url("")'
+            squareTarget.style.backgroundColor = "green"
+        } else { return }
     }
     changeTurn()
 
@@ -218,10 +222,6 @@ function init () {
     p2Holdings = startHoldings
     p3Holdings = startHoldings
     p4Holdings = startHoldings
-    p1Horses = 'Click "Draw Horses"'
-    p2Horses = 'Click "Draw Horses"'
-    p3Horses = 'Click "Draw Horses"'
-    p4Horses = 'Click "Draw Horses"'
     p1Name = "Player 1"
     p2Name = "Player 2"
     p3Name = "Player 3"
@@ -229,7 +229,6 @@ function init () {
     playerTurn = p1Name
     die1 = 1
     die2 = 1
-    raceStatus = "draw"
     resetHorses()
     render()
 }
@@ -283,10 +282,10 @@ function resetHorses() {
     resetBorderStyling()
     messageEl.textContent = 'Click "Draw Horses" to Begin Next Race!'
     raceStatus = "draw"
-    p1HorsesDisplay.textContent = 'Click "Draw Horses"'
-    p2HorsesDisplay.textContent = 'Click "Draw Horses"'
-    p3HorsesDisplay.textContent = 'Click "Draw Horses"'
-    p4HorsesDisplay.textContent = 'Click "Draw Horses"'
+    p1HorsesDisplay.textContent = 'Draw Horses'
+    p2HorsesDisplay.textContent = 'Draw Horses'
+    p3HorsesDisplay.textContent = 'Draw Horses'
+    p4HorsesDisplay.textContent = 'Draw Horses'
 }
 
 function resetBorderStyling() {
