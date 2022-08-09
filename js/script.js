@@ -43,19 +43,6 @@ const startHoldings = 100
 const scratchValue = 2
 const startingPot = 0
 const maxWins = startHoldings*3
-// const startTrack = [
-//     [null,h2,null,null,null,null,null,null,null,null],
-//     [null,h3,null,null,null,null,null,null,null,null],
-//     [null,h4,null,null,null,null,null,null,null,null],
-//     [null,h5,null,null,null,null,null,null,null,null],
-//     [null,h6,null,null,null,null,null,null,null,null],
-//     [null,h7,null,null,null,null,null,null,null,null],
-//     [null,h8,null,null,null,null,null,null,null,null],
-//     [null,h9,null,null,null,null,null,null,null,null],
-//     [null,h10,null,null,null,null,null,null,null,null],
-//     [null,h11,null,null,null,null,null,null,null,null],
-//     [null,h12,null,null,null,null,null,null,null,null]
-// ]
 
 /*----- app's state (variables) -----*/
 
@@ -79,21 +66,6 @@ let die2 = 1
 let rolledHorse
 let pot = 0
 let raceStatus = "draw"
-// let horseTarget
-// let squareTarget
-// let track = []
-// TBD: does the track above replace the need for the below?
-// let h2Position
-// let h3Position
-// let h4Position
-// let h5Position
-// let h6Position
-// let h7Position
-// let h8Position
-// let h9Position
-// let h10Position
-// let h11Position
-// let h12Position
 
 
 /*----- cached element references -----*/
@@ -189,9 +161,17 @@ function rollRace() {
     die1 = getRandomDieNum()
     die2 = getRandomDieNum()
     rolledHorse = die1 + die2
+    if (scratchHorses.includes(rolledHorse)){
+        console.log("scratch!")
+    } else {
+        let horseTarget = document.getElementById("h" + rolledHorse)
+        let squareTarget = document.getElementById("1r" + rolledHorse)
+        squareTarget.textContent=""
+        squareTarget.appendChild(horseTarget)
+    }
     changeTurn()
 
-    // raceWinEvent function including pot split and set raceStatus = "draw"
+    // if horse parent class==="fin" raceWinEvent function including pot split and set raceStatus = "draw"
 }
 
 const p1Count = {};
@@ -250,24 +230,11 @@ function init () {
     die1 = 1
     die2 = 1
     raceStatus = "draw"
-    track = startTrack
-    // h2Position = ""//gate TBD
-    // h3Position = ""//gate TBD
-    // h4Position = ""//gate TBD
-    // h5Position = ""//gate TBD
-    // h6Position = ""//gate TBD
-    // h7Position = ""//gate TBD
-    // h8Position = ""//gate TBD
-    // h9Position = ""//gate TBD
-    // h10Position = ""//gate TBD
-    // h11Position = ""//gate TBD
-    // h12Position = ""//gate TBD
-
+    resetHorses()
     render()
 }
 
 function render() {
-    //update DOM values
     currentPotMsg.textContent = `Current Pot: $ ${pot}`
     rollerMsg.textContent = `Roller: ${playerTurn}`
     p1HoldingsDisplay.textContent = `$ ${p1Holdings}`
@@ -286,7 +253,6 @@ function render() {
     die1El.src = `imgs/${die1}d.png`
     die2El.src = `imgs/${die2}d.png`
     rolledHorseEl.textContent = Number(die1) + Number(die2)
-    //track
 }
 
 function getRandomDieNum() {
@@ -306,4 +272,12 @@ function changeTurn () {
 
 function checkWinner(){
     //check winner
+}
+
+function resetHorses() {
+    for (let i=2; i<13; i++) {
+    let horseTarget = document.getElementById("h" + i)
+    let squareTarget = document.getElementById("g" + i)
+    squareTarget.appendChild(horseTarget)
+    }
 }
