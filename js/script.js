@@ -179,7 +179,7 @@ function rollRace() {
         if (squareTarget.classList.contains("fin")){
             squareTarget.style.backgroundImage= 'url("")'
             squareTarget.style.backgroundColor = "green"
-            payoutPot()
+            payoutPot(rolledHorse)
             message = 'Click "Draw Horses" to Begin Next Race!'
             raceStatus = "draw"
             p1Horses = []
@@ -329,5 +329,19 @@ function payScratch() {
 }
 
 function payoutPot() {
-    console.log("pay the winners would ya?")
+    //converts undefined to zeros for pot distibution math
+    p1Count[rolledHorse] = p1Count[rolledHorse] ? p1Count[rolledHorse] : 0
+    p2Count[rolledHorse] = p2Count[rolledHorse] ? p2Count[rolledHorse] : 0
+    p3Count[rolledHorse] = p3Count[rolledHorse] ? p3Count[rolledHorse] : 0
+    p4Count[rolledHorse] = p4Count[rolledHorse] ? p4Count[rolledHorse] : 0
+    //determines total winning horses held
+    let numWinners = p1Count[rolledHorse] + p2Count[rolledHorse] + p3Count[rolledHorse] + p4Count[rolledHorse]
+    //portions pot by number of winner
+    let potPortion = pot / numWinners
+    //distrbutes portions to winners
+    p1Holdings += potPortion * p1Count[rolledHorse]
+    p2Holdings += potPortion * p2Count[rolledHorse]
+    p3Holdings += potPortion * p3Count[rolledHorse]
+    p4Holdings += potPortion * p4Count[rolledHorse]
+    pot = 0
 }
