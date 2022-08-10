@@ -1,10 +1,11 @@
+/*----- pseudocode -----*/
 // 1.0 User selects between two options: "quick-play" or "custom settings" (If there is time and ability):
 //     1.1: If User selects "quick-play" then render board with default settings:
 //         1.1.1: Player names "Player 1" - "Player 4"
-//         1.1.2: $10,000 in each players holdings
-//         1.1.3: $200 scratch penalty
+//         1.1.2: $100 in each players holdings
+//         1.1.3: $2 scratch penalty
 //         1.1.4: All horses in the "gate" position
-
+//     [ICEBOX]
 //     1.2: If User selects "custom settings" then render board with user input settings
 //         1.2.1: Player namess (User Input)
 //         1.2.2: (User Input) in each players holdings
@@ -30,12 +31,9 @@
 //     5.1: The value of the pot is divided by the total number of winning numbers held by all users
 //             If no winner then pot starts at the current value next race
 //     5.2: This value is then multiplied by the number of winning numbers each player holds and is added to their holdings
-//     5.3: If any players holds greater than 70% of the total holdings value - end the game and declare winner
+//     5.3: If any players holds greater than 50% of the total holdings value - end the game and declare a winner
 //     5.4: Else horses are reset to the "gate" position and we loop back to 2.0
     
-// TBD: At each scratch penalty payment event we must check for players holding value dropping is less than or equal to $0
-//         This could trigger elimination from the game. Alternatively, we may allow players to plunge into negative values (bank loan anyone?)
-
 
 /*----- constants -----*/
 
@@ -208,8 +206,8 @@ function rollRace() {
     }
 }
 
+//function sums count of each horse in the players horse arrays for math calcs in payoutPot and rolScratch functions
 function countPlayerHorses () {
-
     for (const num of p1Horses) {
         if (p1Count[num]){
             p1Count[num] += 1
@@ -240,6 +238,7 @@ function countPlayerHorses () {
     }
 }
 
+//initialize board for new game
 function init () {
     message = 'Click "Draw Horses" to Begin!'
     pot = startingPot
@@ -262,6 +261,7 @@ function init () {
     render()
 }
 
+//render the board function is called after each move
 function render() {
     currentPotMsg.textContent = `Current Pot: $ ${pot}`
     rollerMsg.textContent = `Roller: ${playerTurn}`
@@ -290,14 +290,17 @@ function render() {
     rolledHorseEl.textContent = Number(die1) + Number(die2)
 }
 
+//returns randum number between 1 and 6
 function getRandomDieNum() {
     return Math.floor(Math.random()*6 + 1)
 }
 
+//returns random number between 2 and 12
 function getRandomHorseNum() {
     return Math.floor(Math.random()*11 + 2)
 }
 
+//changes plater turn
 function changeTurn () {
     if (playerTurn === p1Name){playerTurn = p2Name}
     else if (playerTurn === p2Name){playerTurn = p3Name}
@@ -305,10 +308,7 @@ function changeTurn () {
     else {playerTurn = p1Name}
 }
 
-function checkWinner(){
-    //check winner
-}
-
+//resets horse back to gate, called after race
 function resetHorses() {
     for (let i=2; i<13; i++) {
         let horseTarget = document.getElementById("h" + i)
@@ -318,6 +318,7 @@ function resetHorses() {
     resetBorderStyling()
 }
 
+//resets border styling, called after race
 function resetBorderStyling() {
     let raceSquares = document.getElementsByClassName("race")
 
@@ -327,6 +328,7 @@ function resetBorderStyling() {
     }
 }
 
+//called if scratch horse is roller and pays scratch amount from player into pot
 function payScratch() {
     if (playerTurn === p1Name) {
         p1Holdings -= scratchValue
@@ -368,18 +370,18 @@ function gameWinCheck() {
     if (p1Holdings>maxHoldings){
         messageEl.style.color = "green"
         message = "Player 1 Wins the Game!!"
-        // setTimeout(init,5500)
+        setTimeout(init,5500)
     } else if (p2Holdings>maxHoldings){
         messageEl.style.color = "green"
         message = "Player 2 Wins the Game!!"
-        // setTimeout(init,5500)
+        setTimeout(init,5500)
     } else if (p3Holdings>maxHoldings){
         messageEl.style.color = "green"
         message = "Player 3 Wins the Game!!"
-        // setTimeout(init,5500)
+        setTimeout(init,5500)
     } else if (p4Holdings>maxHoldings){
         messageEl.style.color = "green"
         message = "Player 4 Wins the Game!!"
-        // setTimeout(init,5500)
+        setTimeout(init,5500)
     } else { return }
 }
