@@ -14,7 +14,7 @@ table {
 }
 
 .draw {
-    margin-top: 10px;
+    margin: 10px 0px 20px 0px;
     font-size: 30px;
     background-color: rgb(150, 125, 51);
 }
@@ -22,7 +22,7 @@ table {
 .roll {
     font-size: 30px;
     background-color: rgb(51, 150, 128);
-    padding: 0px 60px;
+    padding: 0px 70px;
     margin: 0px 0px 10px 0px;
 }
 
@@ -85,7 +85,12 @@ em {
 }
 
 p {
-    margin-top: 10px;
+    margin-top: 0px;
+}
+
+.label {
+    padding-top: 15px;
+    font-size: 30px;
 }
 
 

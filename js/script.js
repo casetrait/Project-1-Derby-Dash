@@ -118,13 +118,14 @@ function drawHorses() {
 }
 
 function roll () {
-    if (raceStatus === "scratch" || "racing"){  
+    if (raceStatus !== "draw"){  
     if (raceStatus === "scratch"){
         rollScratch()
       } else {
         rollRace()
       }
     render()
+    setTimeout(render,5000)
     }
     else { return }
 }
@@ -165,6 +166,7 @@ function rollRace() {
     rolledHorse = die1 + die2
     if (scratchHorses.includes(rolledHorse)){
         console.log("scratch!")
+        payScratch()
     } else {
         let horseTarget = document.getElementById("h" + rolledHorse)
         let currentColumn = horseTarget.parentNode.id.charAt(0)
@@ -175,8 +177,16 @@ function rollRace() {
         if (squareTarget.classList.contains("fin")){
             squareTarget.style.backgroundImage= 'url("")'
             squareTarget.style.backgroundColor = "green"
-            setTimeout(resetHorses, 3000)
-            setTimeout(function(){squareTarget.style.backgroundImage = "url('imgs/checkers.png')"},3000)
+            payoutPot()
+            message = 'Click "Draw Horses" to Begin Next Race!'
+            raceStatus = "draw"
+            p1Horses = []
+            p2Horses = []
+            p3Horses = []
+            p4Horses = []
+            scratchHorses = []
+            setTimeout(resetHorses, 4000)
+            setTimeout(function(){squareTarget.style.backgroundImage = "url('imgs/checkers.png')"},4000)
         } else { return }
     }
     changeTurn()
@@ -228,6 +238,10 @@ function init () {
     p2Name = "Player 2"
     p3Name = "Player 3"
     p4Name = "Player 4"
+    p1Horses = []
+    p2Horses = []
+    p3Horses = []
+    p4Horses = []
     playerTurn = p1Name
     die1 = 1
     die2 = 1
@@ -246,10 +260,17 @@ function render() {
     p2NameDisplay.textContent = p2Name
     p3NameDisplay.textContent = p3Name
     p4NameDisplay.textContent = p4Name
-    p1HorsesDisplay.textContent = p1Horses
-    p2HorsesDisplay.textContent = p2Horses
-    p3HorsesDisplay.textContent = p3Horses
-    p4HorsesDisplay.textContent = p4Horses
+    if (p1Horses[0]){
+        p1HorsesDisplay.textContent = p1Horses
+        p2HorsesDisplay.textContent = p2Horses
+        p3HorsesDisplay.textContent = p3Horses
+        p4HorsesDisplay.textContent = p4Horses
+    } else {
+        p1HorsesDisplay.textContent = 'Draw Horses'
+        p2HorsesDisplay.textContent = 'Draw Horses'
+        p3HorsesDisplay.textContent = 'Draw Horses'
+        p4HorsesDisplay.textContent = 'Draw Horses'
+    }
     messageEl.textContent = message
     die1El.src = `imgs/${die1}d.png`
     die2El.src = `imgs/${die2}d.png`
@@ -277,17 +298,11 @@ function checkWinner(){
 
 function resetHorses() {
     for (let i=2; i<13; i++) {
-    let horseTarget = document.getElementById("h" + i)
-    let squareTarget = document.getElementById("0r" + i)
-    squareTarget.appendChild(horseTarget)
+        let horseTarget = document.getElementById("h" + i)
+        let squareTarget = document.getElementById("0r" + i)
+        squareTarget.appendChild(horseTarget)
     }
     resetBorderStyling()
-    message = 'Click "Draw Horses" to Begin Next Race!'
-    raceStatus = "draw"
-    p1Horses = 'Draw Horses'
-    p2Horses = 'Draw Horses'
-    p3Horses = 'Draw Horses'
-    p4Horses = 'Draw Horses'
 }
 
 function resetBorderStyling() {
@@ -297,4 +312,24 @@ function resetBorderStyling() {
         let raceSquare = raceSquares[i];
         raceSquare.style.border = "5px solid white"
     }
+}
+
+function payScratch() {
+    if (playerTurn === p1Name) {
+        p1Holdings -= scratchValue
+        pot += scratchValue 
+    } else if (playerTurn === p2Name) {
+        p2Holdings -= scratchValue
+        pot += scratchValue 
+    } else if (playerTurn === p3Name) {
+        p3Holdings -= scratchValue
+        pot += scratchValue 
+    } else {
+        p4Holdings -= scratchValue
+        pot += scratchValue 
+    }
+}
+
+function payoutPot() {
+    console.log("pay the winners would ya?")
 }
