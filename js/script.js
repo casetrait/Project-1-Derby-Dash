@@ -42,7 +42,7 @@
 const startHoldings = 100
 const scratchValue = 2
 const startingPot = 0
-const maxWins = startHoldings*3
+const maxHoldings = startHoldings*1.3
 
 /*----- app's state (variables) -----*/
 
@@ -103,6 +103,7 @@ rollButton.addEventListener("click", roll)
 /*----- functions -----*/
 
 function drawHorses() {
+    //draw 6 random horses between 2 and 12 for each player
      if(raceStatus === "draw"){
             for (let i=0; i<6; i++) {
             p1Horses.push(getRandomHorseNum())
@@ -118,6 +119,7 @@ function drawHorses() {
 }
 
 function roll () {
+    //uses race status to determine whether drawing scratch horses or racing and renders results
     if (raceStatus !== "draw"){  
     if (raceStatus === "scratch"){
         rollScratch()
@@ -125,15 +127,16 @@ function roll () {
         rollRace()
       }
     render()
-    setTimeout(render,5000)
     }
     else { return }
 }
 
 function rollScratch() {
+    //die roll - consider nesting function
     die1 = getRandomDieNum()
     die2 = getRandomDieNum()
     rolledHorse = die1 + die2
+    //checks if horse isn't already scratched
     if (scratchHorses.indexOf(rolledHorse) === -1){
         scratchHorses.push(rolledHorse)
         //converts undefined counts into 0 for purpose of math
@@ -154,6 +157,7 @@ function rollScratch() {
         squareTarget.appendChild(horseTarget)
         changeTurn()
     } else { return }
+    //change status to racing once 4 scratch horses are elected
     if (scratchHorses.length === 4) {      
         raceStatus = "racing"
         message = 'Click "Roll" to Race!'
@@ -161,34 +165,45 @@ function rollScratch() {
 }
 
 function rollRace() {
+    //die roll - consider nesting function
     die1 = getRandomDieNum()
     die2 = getRandomDieNum()
     rolledHorse = die1 + die2
+    //check for scratch
     if (scratchHorses.includes(rolledHorse)){
-        console.log("scratch!")
         payScratch()
         changeTurn()
+    //i not scratch horses move up the track
     } else {
+        //cache rolled horse image
         let horseTarget = document.getElementById("h" + rolledHorse)
+        //determines current location and adds one to column ID to determine target square for move
         let currentColumn = horseTarget.parentNode.id.charAt(0)
         let nextColumn = Number(currentColumn) + 1
         let squareTarget = document.getElementById(nextColumn + "r" + rolledHorse)
         squareTarget.style.border = "none"
+        //moves cached horse to target square
         squareTarget.appendChild(horseTarget)
         changeTurn()
+        //checks move for race win condition, pays and updates game state for next race
         if (squareTarget.classList.contains("fin")){
             squareTarget.style.backgroundImage= 'url("")'
             squareTarget.style.backgroundColor = "green"
-            payoutPot(rolledHorse)
-            message = 'Click "Draw Horses" to Begin Next Race!'
+            payoutPot()
             raceStatus = "draw"
             p1Horses = []
             p2Horses = []
             p3Horses = []
             p4Horses = []
             scratchHorses = []
+            message = `${rolledHorse} Horse Wins!!`
+            gameWinCheck()
             setTimeout(resetHorses, 4000)
-            setTimeout(function(){squareTarget.style.backgroundImage = "url('imgs/checkers.png')"},4000)
+            setTimeout(function(){
+                squareTarget.style.backgroundImage = "url('imgs/checkers.png')"
+                messageEl.style.color = "white"
+                messageEl.textContent = 'Click "Draw Horses" to Begin Next Race!'
+            },4000)
         } else { return }
     }
 }
@@ -338,10 +353,33 @@ function payoutPot() {
     let numWinners = p1Count[rolledHorse] + p2Count[rolledHorse] + p3Count[rolledHorse] + p4Count[rolledHorse]
     //portions pot by number of winner
     let potPortion = pot / numWinners
-    //distrbutes portions to winners
-    p1Holdings += potPortion * p1Count[rolledHorse]
-    p2Holdings += potPortion * p2Count[rolledHorse]
-    p3Holdings += potPortion * p3Count[rolledHorse]
-    p4Holdings += potPortion * p4Count[rolledHorse]
-    pot = 0
+    //distrbutes rounded portions to winners
+    p1Holdings += Math.round(potPortion * p1Count[rolledHorse])
+    p2Holdings += Math.round(potPortion * p2Count[rolledHorse])
+    p3Holdings += Math.round(potPortion * p3Count[rolledHorse])
+    p4Holdings += Math.round(potPortion * p4Count[rolledHorse])
+    if (numWinners !== 0){
+        pot = 0
+    } else { return }
+    
+}
+
+function gameWinCheck() {
+    if (p1Holdings>maxHoldings){
+        messageEl.style.color = "green"
+        message = "Player 1 Wins the Game!!"
+        // setTimeout(init,5500)
+    } else if (p2Holdings>maxHoldings){
+        messageEl.style.color = "green"
+        message = "Player 2 Wins the Game!!"
+        // setTimeout(init,5500)
+    } else if (p3Holdings>maxHoldings){
+        messageEl.style.color = "green"
+        message = "Player 3 Wins the Game!!"
+        // setTimeout(init,5500)
+    } else if (p4Holdings>maxHoldings){
+        messageEl.style.color = "green"
+        message = "Player 4 Wins the Game!!"
+        // setTimeout(init,5500)
+    } else { return }
 }
