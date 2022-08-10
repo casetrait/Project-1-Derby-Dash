@@ -167,6 +167,7 @@ function rollRace() {
     if (scratchHorses.includes(rolledHorse)){
         console.log("scratch!")
         payScratch()
+        changeTurn()
     } else {
         let horseTarget = document.getElementById("h" + rolledHorse)
         let currentColumn = horseTarget.parentNode.id.charAt(0)
@@ -174,6 +175,7 @@ function rollRace() {
         let squareTarget = document.getElementById(nextColumn + "r" + rolledHorse)
         squareTarget.style.border = "none"
         squareTarget.appendChild(horseTarget)
+        changeTurn()
         if (squareTarget.classList.contains("fin")){
             squareTarget.style.backgroundImage= 'url("")'
             squareTarget.style.backgroundColor = "green"
@@ -189,11 +191,7 @@ function rollRace() {
             setTimeout(function(){squareTarget.style.backgroundImage = "url('imgs/checkers.png')"},4000)
         } else { return }
     }
-    changeTurn()
-
-    // if horse parent class==="fin" raceWinEvent function including pot split and set raceStatus = "draw"
 }
-
 
 function countPlayerHorses () {
 
