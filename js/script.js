@@ -33,7 +33,9 @@
 //     5.2: This value is then multiplied by the number of winning numbers each player holds and is added to their holdings
 //     5.3: If any players holds greater than 50% of the total holdings value - end the game and declare a winner
 //     5.4: Else horses are reset to the "gate" position and we loop back to 2.0
-    
+  
+// need to replicated and debug holdings NaN error (test what happens if nobody draws a winning horse)
+// also noticed a massive pot jump when testing at some point
 
 /*----- constants -----*/
 
@@ -125,6 +127,7 @@ function roll () {
         rollRace()
       }
     render()
+    setTimeout(render, 7100)
     }
     else { return }
 }
@@ -189,19 +192,33 @@ function rollRace() {
             squareTarget.style.backgroundColor = "green"
             payoutPot()
             raceStatus = "draw"
-            p1Horses = []
-            p2Horses = []
-            p3Horses = []
-            p4Horses = []
             scratchHorses = []
+            messageEl.style.color = "green"
             message = `${rolledHorse} Horse Wins!!`
+            p1HorsesDisplay.style.color = "green"
+            p2HorsesDisplay.style.color = "green"
+            p3HorsesDisplay.style.color = "green"
+            p4HorsesDisplay.style.color = "green"
+            p1Horses = `${p1Count[rolledHorse]} x Winner`
+            p2Horses = `${p2Count[rolledHorse]} x Winner`
+            p3Horses = `${p3Count[rolledHorse]} x Winner`
+            p4Horses = `${p4Count[rolledHorse]} x Winner`
             gameWinCheck()
-            setTimeout(resetHorses, 4000)
+            //timeout before resetting state and rendering allows user to observe results
             setTimeout(function(){
+                resetHorses()
                 squareTarget.style.backgroundImage = "url('imgs/checkers.png')"
                 messageEl.style.color = "white"
-                messageEl.textContent = 'Click "Draw Horses" to Begin Next Race!'
-            },4000)
+                message = 'Click "Draw Horses" to Begin Next Race!'
+                p1HorsesDisplay.style.color = "white"
+                p2HorsesDisplay.style.color = "white"
+                p3HorsesDisplay.style.color = "white"
+                p4HorsesDisplay.style.color = "white"
+                p1Horses = []
+                p2Horses = []
+                p3Horses = []
+                p4Horses = []
+            },7000)
         } else { return }
     }
 }
@@ -370,18 +387,18 @@ function gameWinCheck() {
     if (p1Holdings>maxHoldings){
         messageEl.style.color = "green"
         message = "Player 1 Wins the Game!!"
-        setTimeout(init,5500)
+        setTimeout(init,7500)
     } else if (p2Holdings>maxHoldings){
         messageEl.style.color = "green"
         message = "Player 2 Wins the Game!!"
-        setTimeout(init,5500)
+        setTimeout(init,7500)
     } else if (p3Holdings>maxHoldings){
         messageEl.style.color = "green"
         message = "Player 3 Wins the Game!!"
-        setTimeout(init,5500)
+        setTimeout(init,7500)
     } else if (p4Holdings>maxHoldings){
         messageEl.style.color = "green"
         message = "Player 4 Wins the Game!!"
-        setTimeout(init,5500)
+        setTimeout(init,7500)
     } else { return }
 }
