@@ -1,97 +1,95 @@
 * {
-font-size: 22px;
-color: white;
-font-family: 'Poiret One', cursive;
-text-align: center;
+  font-size: 22px;
+  color: white;
+  font-family: "Poiret One", cursive;
+  text-align: center;
 }
 
 body {
-    background-color: #290518;
+  background-color: #290518;
 }
 
 table {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .draw {
-    margin: 10px 0px 20px 0px;
-    font-size: 30px;
-    background-color: rgb(150, 125, 51);
+  margin: 10px 0px 20px 0px;
+  font-size: 30px;
+  background-color: rgb(150, 125, 51);
 }
 
 .roll {
-    font-size: 30px;
-    background-color: rgb(51, 150, 128);
-    padding: 0px 70px;
-    margin: 0px 0px 10px 0px;
+  font-size: 30px;
+  background-color: rgb(51, 150, 128);
+  padding: 0px 70px;
+  margin: 0px 0px 10px 0px;
 }
 
-th, td {
-    border: 2px solid white;
-    padding: 5px 15px;
-    font-size: 15px;
+th,
+td {
+  border: 2px solid white;
+  padding: 5px 15px;
+  font-size: 15px;
 }
 
-.left-content { 
-    width: 340px;
-    padding: 20px;
+.left-content {
+  width: 340px;
+  padding: 20px;
 }
 
 #logo {
-    margin-top: -20px;
-    margin-left: -30px;
+  margin-top: -20px;
+  margin-left: -30px;
 }
 
 .board {
-    display: grid;
-    grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px 100px 100px;
-    grid-template-rows: 50px 60px 60px 60px 60px 60px 60px 60px 60px 60px 60px 60px;
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: 50px 60px 60px 60px 60px 60px 60px 60px 60px 60px 60px 60px;
 }
 
 main {
-    display: flex;
+  display: flex;
 }
 
 h1 {
-    grid-column: span 8;
-    font-size: 35px;
-    text-align:left;
-    padding-left: 100px;
-    margin-top: 0px;
-    text-decoration: underline;
+  grid-column: span 8;
+  font-size: 35px;
+  text-align: left;
+  padding-left: 100px;
+  margin-top: 0px;
+  text-decoration: underline;
 }
 
 .gate {
-    background-color: rgb(51, 150, 128);
+  background-color: rgb(51, 150, 128);
 }
 
 .scratch {
-    background-color: rgb(214, 56, 56);
+  background-color: rgb(214, 56, 56);
 }
 
 .fin {
-    background-image: url("../imgs/checkers.png");
-    background-size: 219px;
+  background-image: url("../imgs/checkers.png");
+  background-size: 219px;
 }
 
 .race {
-    font-size: 40px;
-    margin: auto;
-    border: 5px solid white;
+  font-size: 40px;
+  margin: auto;
+  border: 5px solid white;
 }
 
 em {
-    font-style: normal;
+  font-style: normal;
 }
 
 p {
-    margin-top: 0px;
+  margin-top: 0px;
 }
 
 .label {
-    padding-top: 15px;
-    font-size: 30px;
+  padding-top: 15px;
+  font-size: 30px;
 }
-
-
-

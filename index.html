@@ -1,188 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Derby Dash</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <script defer src="js/script.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <div class="left-content">
-            <img ID="logo" src="imgs/logo.png" alt="Derby Dash Logo" width="330">
-            <table>
-                <tr>
-                <th>Name</th>
-                <th>Holdings</th>
-                <th>Horses</th>
-                </tr>
-                <tr>
-                <td ID="p1Name">Player 1</td>
-                <td ID="p1Holdings">$ 100</td>
-                <td ID="p1Horses">Draw Horses</td>
-                </tr>
-                <tr>
-                    <td ID="p2Name">Player 2</td>
-                    <td ID="p2Holdings">$ 100</td>
-                    <td ID="p2Horses">Draw Horses</td>
-                </tr>
-                <tr>
-                    <td ID="p3Name">Player 3</td>
-                    <td ID="p3Holdings">$ 100</td>
-                    <td ID="p3Horses">Draw Horses</td>
-                </tr>
-                <tr>
-                    <td ID="p4Name">Player 4</td>
-                    <td ID="p4Holdings">$ 100</td>
-                    <td ID="p4Horses">Draw Horses</td>
-                </tr>
-            </table>
-            <button class="draw">DRAW HORSES</button>
-            <p ID="currentPot">Current Pot: <strong ID ="pot">$ 0</strong></p>
-            <p ID="roller">Roller: <strong ID ="roller">Player 1</strong></p>
-            <button class="roll">ROLL</button>
-            <div>
-                <img ID = "die1" src="imgs/1d.png" height="100">
-                <img ID = "die2" src="imgs/1d.png" height="100">
-            </div>
-            <p>Rolled Horse: <em ID="rolledHorse">2</em></p>
-            
+      <div class="left-content">
+        <img id="logo" src="imgs/logo.png" alt="Derby Dash Logo" width="330" />
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Holdings</th>
+            <th>Horses</th>
+          </tr>
+          <tr>
+            <td id="p1Name">Player 1</td>
+            <td id="p1Holdings">$ 100</td>
+            <td id="p1Horses">Draw Horses</td>
+          </tr>
+          <tr>
+            <td id="p2Name">Player 2</td>
+            <td id="p2Holdings">$ 100</td>
+            <td id="p2Horses">Draw Horses</td>
+          </tr>
+          <tr>
+            <td id="p3Name">Player 3</td>
+            <td id="p3Holdings">$ 100</td>
+            <td id="p3Horses">Draw Horses</td>
+          </tr>
+          <tr>
+            <td id="p4Name">Player 4</td>
+            <td id="p4Holdings">$ 100</td>
+            <td id="p4Horses">Draw Horses</td>
+          </tr>
+        </table>
+        <button class="draw">DRAW HORSES</button>
+        <p id="currentPot">Current Pot: <strong ID="pot">$ 0</strong></p>
+        <p id="roller">Roller: <strong ID="roller">Player 1</strong></p>
+        <button class="roll">ROLL</button>
+        <div>
+          <img id="die1" src="imgs/1d.png" height="100" />
+          <img id="die2" src="imgs/1d.png" height="100" />
         </div>
-        <div class="board">
-            <p class="label">Scratch</p>
-            <p class="label">Gate</p>
-            <h1 ID="message">Click "Draw Horses" to Begin!</h1> 
+        <p>Rolled Horse: <em ID="rolledHorse">2</em></p>
+      </div>
+      <div class="board">
+        <p class="label">Scratch</p>
+        <p class="label">Gate</p>
+        <h1 id="message">Click "Draw Horses" to Begin!</h1>
 
-            <div class="scratch" ID="s2"></div>
-            <div class="gate" ID="0r2"><img ID= "h2" src="imgs/2h.png" height="55"></div>
-            <div class="race" ID="1r2"></div>
-            <div class="race" ID="2r2"></div>
-            <div class="fin" ID="3r2"></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-
-            <div class="scratch" ID="s3"></div>
-            <div class="gate" ID="0r3"><img ID="h3" src="imgs/3h.png" height="55"></div>
-            <div class="race" ID="1r3"></div>
-            <div class="race" ID="2r3"></div>
-            <div class="race" ID="3r3"></div>
-            <div class="fin" ID="4r3"></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-                    
-            <div class="scratch" ID="s4"></div>
-            <div class="gate" ID="0r4"><img ID="h4" src="imgs/4h.png" height="55"></div>
-            <div class="race" ID="1r4"></div>
-            <div class="race" ID="2r4"></div>
-            <div class="race" ID="3r4"></div>
-            <div class="race" ID="4r4"></div>
-            <div class="fin" ID="5r4"></div>
-            <div></div>
-            <div></div>
-            <div></div>
-                    
-            <div class="scratch" ID="s5"></div>
-            <div class="gate" ID="0r5"><img ID="h5" src="imgs/5h.png" height="55"></div>
-            <div class="race" ID="1r5"></div>
-            <div class="race" ID="2r5"></div>
-            <div class="race" ID="3r5"></div>
-            <div class="race" ID="4r5"></div>
-            <div class="race" ID="5r5"></div>
-            <div class="fin" ID="6r5"></div>
-            <div></div>
-            <div></div>
-                    
-            <div class="scratch" ID="s6"></div>
-            <div class="gate" ID="0r6"><img ID="h6" src="imgs/6h.png" height="55"></div>
-            <div class="race" ID="1r6"></div>
-            <div class="race" ID="2r6"></div>
-            <div class="race" ID="3r6"></div>
-            <div class="race" ID="4r6"></div>
-            <div class="race" ID="5r6"></div>
-            <div class="race" ID="6r6"></div>
-            <div class="fin" ID="7r6"></div>
-            <div></div>
-                    
-            <div class="scratch" ID="s7"></div>
-            <div class="gate" ID="0r7"><img ID="h7" src="imgs/7h.png" height="55"></div>
-            <div class="race" ID="1r7"></div>
-            <div class="race" ID="2r7"></div>
-            <div class="race" ID="3r7"></div>
-            <div class="race" ID="4r7"></div>
-            <div class="race" ID="5r7"></div>
-            <div class="race" ID="6r7"></div>
-            <div class="race" ID="7r7"></div>
-            <div class="fin" ID="8r7"></div>
-                    
-            <div class="scratch" ID="s8"></div>
-            <div class="gate" ID="0r8"><img ID="h8" src="imgs/8h.png" height="55"></div>
-            <div class="race" ID="1r8"></div>
-            <div class="race" ID="2r8"></div>
-            <div class="race" ID="3r8"></div>
-            <div class="race" ID="4r8"></div>
-            <div class="race" ID="5r8"></div>
-            <div class="race" ID="6r8"></div>
-            <div class="fin" ID="7r8"></div>
-            <div></div>
-                    
-            <div class="scratch" ID="s9"></div>
-            <div class="gate" ID="0r9"><img ID="h9" src="imgs/9h.png" height="55"></div>
-            <div class="race" ID="1r9"></div>
-            <div class="race" ID="2r9"></div>
-            <div class="race" ID="3r9"></div>
-            <div class="race" ID="4r9"></div>
-            <div class="race" ID="5r9"></div>
-            <div class="fin" ID="6r9"></div>
-            <div></div>
-            <div></div>
-                    
-            <div class="scratch" ID="s10"></div>
-            <div class="gate" ID="0r10"><img ID="h10" src="imgs/10h.png" height="55"></div>
-            <div class="race" ID="1r10"></div>
-            <div class="race" ID="2r10"></div>
-            <div class="race" ID="3r10"></div>
-            <div class="race" ID="4r10"></div>
-            <div class="fin" ID="5r10"></div>
-            <div></div>
-            <div></div>
-            <div></div>
-                    
-            <div class="scratch" ID="s11"></div>
-            <div class="gate" ID="0r11"><img ID="h11" src="imgs/11h.png" height="55"></div>
-            <div class="race" ID="1r11"></div>
-            <div class="race" ID="2r11"></div>
-            <div class="race" ID="3r11"></div>
-            <div class="fin" ID="4r11"></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-
-            <div class="scratch" ID="s12"></div>
-            <div class="gate" ID="0r12"><img ID="h12" src="imgs/12h.png" height="55"></div>
-            <div class="race" ID="1r12"></div>
-            <div class="race" ID="2r12"></div>
-            <div class="fin" ID="3r12"></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="scratch" id="s2"></div>
+        <div class="gate" id="0r2">
+          <img id="h2" src="imgs/2h.png" height="55" />
         </div>
+        <div class="race" id="1r2"></div>
+        <div class="race" id="2r2"></div>
+        <div class="fin" id="3r2"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <div class="scratch" id="s3"></div>
+        <div class="gate" id="0r3">
+          <img id="h3" src="imgs/3h.png" height="55" />
+        </div>
+        <div class="race" id="1r3"></div>
+        <div class="race" id="2r3"></div>
+        <div class="race" id="3r3"></div>
+        <div class="fin" id="4r3"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <div class="scratch" id="s4"></div>
+        <div class="gate" id="0r4">
+          <img id="h4" src="imgs/4h.png" height="55" />
+        </div>
+        <div class="race" id="1r4"></div>
+        <div class="race" id="2r4"></div>
+        <div class="race" id="3r4"></div>
+        <div class="race" id="4r4"></div>
+        <div class="fin" id="5r4"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <div class="scratch" id="s5"></div>
+        <div class="gate" id="0r5">
+          <img id="h5" src="imgs/5h.png" height="55" />
+        </div>
+        <div class="race" id="1r5"></div>
+        <div class="race" id="2r5"></div>
+        <div class="race" id="3r5"></div>
+        <div class="race" id="4r5"></div>
+        <div class="race" id="5r5"></div>
+        <div class="fin" id="6r5"></div>
+        <div></div>
+        <div></div>
+
+        <div class="scratch" id="s6"></div>
+        <div class="gate" id="0r6">
+          <img id="h6" src="imgs/6h.png" height="55" />
+        </div>
+        <div class="race" id="1r6"></div>
+        <div class="race" id="2r6"></div>
+        <div class="race" id="3r6"></div>
+        <div class="race" id="4r6"></div>
+        <div class="race" id="5r6"></div>
+        <div class="race" id="6r6"></div>
+        <div class="fin" id="7r6"></div>
+        <div></div>
+
+        <div class="scratch" id="s7"></div>
+        <div class="gate" id="0r7">
+          <img id="h7" src="imgs/7h.png" height="55" />
+        </div>
+        <div class="race" id="1r7"></div>
+        <div class="race" id="2r7"></div>
+        <div class="race" id="3r7"></div>
+        <div class="race" id="4r7"></div>
+        <div class="race" id="5r7"></div>
+        <div class="race" id="6r7"></div>
+        <div class="race" id="7r7"></div>
+        <div class="fin" id="8r7"></div>
+
+        <div class="scratch" id="s8"></div>
+        <div class="gate" id="0r8">
+          <img id="h8" src="imgs/8h.png" height="55" />
+        </div>
+        <div class="race" id="1r8"></div>
+        <div class="race" id="2r8"></div>
+        <div class="race" id="3r8"></div>
+        <div class="race" id="4r8"></div>
+        <div class="race" id="5r8"></div>
+        <div class="race" id="6r8"></div>
+        <div class="fin" id="7r8"></div>
+        <div></div>
+
+        <div class="scratch" id="s9"></div>
+        <div class="gate" id="0r9">
+          <img id="h9" src="imgs/9h.png" height="55" />
+        </div>
+        <div class="race" id="1r9"></div>
+        <div class="race" id="2r9"></div>
+        <div class="race" id="3r9"></div>
+        <div class="race" id="4r9"></div>
+        <div class="race" id="5r9"></div>
+        <div class="fin" id="6r9"></div>
+        <div></div>
+        <div></div>
+
+        <div class="scratch" id="s10"></div>
+        <div class="gate" id="0r10">
+          <img id="h10" src="imgs/10h.png" height="55" />
+        </div>
+        <div class="race" id="1r10"></div>
+        <div class="race" id="2r10"></div>
+        <div class="race" id="3r10"></div>
+        <div class="race" id="4r10"></div>
+        <div class="fin" id="5r10"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <div class="scratch" id="s11"></div>
+        <div class="gate" id="0r11">
+          <img id="h11" src="imgs/11h.png" height="55" />
+        </div>
+        <div class="race" id="1r11"></div>
+        <div class="race" id="2r11"></div>
+        <div class="race" id="3r11"></div>
+        <div class="fin" id="4r11"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <div class="scratch" id="s12"></div>
+        <div class="gate" id="0r12">
+          <img id="h12" src="imgs/12h.png" height="55" />
+        </div>
+        <div class="race" id="1r12"></div>
+        <div class="race" id="2r12"></div>
+        <div class="fin" id="3r12"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </main>
-</body>
+  </body>
 </html>
-
-
-
-
