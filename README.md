@@ -30,7 +30,7 @@ Using the popular architectural pattern Model-View-Controller (MVC), the code is
 
 ## Getting Started
 ---
-[Click to Play Derby Dash](https://www.example.com)
+[Click to Play Derby Dash](https://casetrait.github.io/Project-1-Derby-Dash/)
 - Follow the instructions at the top of the page to play!
 - Have fun!
 - Please report any bugs or send your thoughts and suggestions to my e-mail: casetrait@gmail.com 
