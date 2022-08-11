@@ -39,7 +39,7 @@
 const startHoldings = 100;
 const scratchValue = 2;
 const startingPot = 0;
-const maxHoldings = startHoldings * 1.1;
+const maxHoldings = startHoldings * 2;
 
 /*----- app's state (variables) -----*/
 
