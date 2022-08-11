@@ -38,15 +38,13 @@ Using the popular architectural pattern Model-View-Controller (MVC), the code is
 ---
 ## Next Steps
 ---
-1. Refactoring code to be more condensed and efficient
-    - Player information object classes
-    - Make code more "DRY" where possible
+1. Refactoring code to hold player information in object classes to make code more efficient and DRY
 2. Improved conditional formatting
     - Removal or grey-out of scratched horses in table
     - Grey-out disabled buttons
-3. Custom settings option including:
-    - Player Names
+3. Additional Custom settings options including:
     - Starting Holdings
     - Scratch Value
     - Game-pieces (dogs, cars, bikes etc.)
 4. Tablet and Mobile friendly views
+5. Add audio and animations to make the game-play more fun
