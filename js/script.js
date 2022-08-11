@@ -39,16 +39,16 @@
 const startHoldings = 100;
 const scratchValue = 2;
 const startingPot = 0;
-const maxHoldings = startHoldings * 1.3;
+const maxHoldings = startHoldings * 1.1;
 
 /*----- app's state (variables) -----*/
 
 let playerTurn = "Player 1";
-let message = 'Click "Draw Horses" to Begin New Game!';
-let p1Name = "Player 1";
-let p2Name = "Player 2";
-let p3Name = "Player 3";
-let p4Name = "Player 4";
+let message = 'Enter Names and Click "Begin Game" to Start';
+let p1Name = ""
+let p2Name = ""
+let p3Name = ""
+let p4Name = ""
 let p1Holdings = 100;
 let p2Holdings = 100;
 let p3Holdings = 100;
@@ -62,7 +62,7 @@ let die1 = 1;
 let die2 = 1;
 let rolledHorse;
 let pot = 0;
-let raceStatus = "draw";
+let raceStatus = "new";
 let p1Count = {};
 let p2Count = {};
 let p3Count = {};
@@ -108,23 +108,32 @@ function drawHorses() {
       p4Horses.push(getRandomHorseNum());
     }
     raceStatus = "scratch";
-    message = 'Click "Roll" to Elect Scratched Horses!';
+    message = 'Click "Roll" to Elect 4 Scratched Horses!';
     countPlayerHorses();
     render();
-  } else {
-    return;
+  } else if (raceStatus === "new") {
+    if(p1Name === ""){    
+      p1Name = document.getElementById("p1NameInput").value;
+      p2Name = document.getElementById("p2NameInput").value;
+      p3Name = document.getElementById("p3NameInput").value;
+      p4Name = document.getElementById("p4NameInput").value;
+    } else {
+        return;
+    }
+      drawButton.textContent = "DRAW HORSES"
+      message = 'Click "Draw Horses" to Set Bet Slips'
+      render();
+      raceStatus = "draw"
+  } else { 
+        return;
   }
 }
 
 function roll() {
   //check raceStatus to determine whether applying scratchRules of raceRules to the roll
-  if (raceStatus !== "draw") {
+  if (raceStatus === "scratch" || raceStatus === "racing") {
     rollDice();
-    if (raceStatus === "scratch") {
-      scratchRules();
-    } else {
-      raceRules();
-    }
+    raceStatus === "scratch" ? scratchRules() : raceRules();
     render();
     setTimeout(render, 6100);
   } else {
@@ -143,11 +152,12 @@ function scratchRules() {
     p3Holdings -= p3Count[rolledHorse] * scratchValue;
     p4Holdings -= p4Count[rolledHorse] * scratchValue;
     //increase pot by scratchValue * total held scratch numbers
-    pot += scratchValue *
-        (p1Count[rolledHorse] +
-          p2Count[rolledHorse] +
-          p3Count[rolledHorse] +
-          p4Count[rolledHorse]);
+    pot +=
+      scratchValue *
+      (p1Count[rolledHorse] +
+        p2Count[rolledHorse] +
+        p3Count[rolledHorse] +
+        p4Count[rolledHorse]);
     //find target classes for squaree and horse to move scratched horses into scratch row
     let horseTarget = document.getElementById("h" + rolledHorse);
     let squareTarget = document.getElementById("s" + rolledHorse);
@@ -200,55 +210,37 @@ function raceRules() {
 //function sums count of each horse in the players horse arrays for math calcs in payoutPot and rolScratch functions
 function countPlayerHorses() {
   for (const num of p1Horses) {
-    if (p1Count[num]) {
-      p1Count[num] += 1;
-    } else {
-      p1Count[num] = 1;
-    }
+    p1Count[num] ? (p1Count[num] += 1) : (p1Count[num] = 1);
   }
   for (const num of p2Horses) {
-    if (p2Count[num]) {
-      p2Count[num] += 1;
-    } else {
-      p2Count[num] = 1;
-    }
+    p2Count[num] ? (p2Count[num] += 1) : (p2Count[num] = 1);
   }
   for (const num of p3Horses) {
-    if (p3Count[num]) {
-      p3Count[num] += 1;
-    } else {
-      p3Count[num] = 1;
-    }
+    p3Count[num] ? (p3Count[num] += 1) : (p3Count[num] = 1);
   }
   for (const num of p4Horses) {
-    if (p4Count[num]) {
-      p4Count[num] += 1;
-    } else {
-      p4Count[num] = 1;
-    }
+    p4Count[num] ? (p4Count[num] += 1) : (p4Count[num] = 1);
   }
 }
 
 //converts undefined counts into 0 for purpose of math
-function zeroCounter(rolledHorse){
-    p1Count[rolledHorse] = p1Count[rolledHorse] ? p1Count[rolledHorse] : 0;
-    p2Count[rolledHorse] = p2Count[rolledHorse] ? p2Count[rolledHorse] : 0;
-    p3Count[rolledHorse] = p3Count[rolledHorse] ? p3Count[rolledHorse] : 0;
-    p4Count[rolledHorse] = p4Count[rolledHorse] ? p4Count[rolledHorse] : 0;
+function zeroCounter(rolledHorse) {
+  p1Count[rolledHorse] = p1Count[rolledHorse] ? p1Count[rolledHorse] : 0;
+  p2Count[rolledHorse] = p2Count[rolledHorse] ? p2Count[rolledHorse] : 0;
+  p3Count[rolledHorse] = p3Count[rolledHorse] ? p3Count[rolledHorse] : 0;
+  p4Count[rolledHorse] = p4Count[rolledHorse] ? p4Count[rolledHorse] : 0;
 }
 
 //initialize board for new game
 function init() {
-  message = 'Click "Draw Horses" to Begin New Game!';
+  message = 'Click "Begin Game" to Start';
+  raceStatus = "new"
   pot = startingPot;
   p1Holdings = startHoldings;
   p2Holdings = startHoldings;
   p3Holdings = startHoldings;
   p4Holdings = startHoldings;
-  p1Name = "Player 1";
-  p2Name = "Player 2";
-  p3Name = "Player 3";
-  p4Name = "Player 4";
+  drawButton.innerText = "BEGIN GAME"
   p1Horses = [];
   p2Horses = [];
   p3Horses = [];
@@ -295,9 +287,9 @@ function render() {
 
 //computes two random dice numbers between 1 and 6 and sums them
 function rollDice() {
-    die1 = Math.floor(Math.random() * 6 + 1);
-    die2 = Math.floor(Math.random() * 6 + 1);
-    rolledHorse = die1 + die2;
+  die1 = Math.floor(Math.random() * 6 + 1);
+  die2 = Math.floor(Math.random() * 6 + 1);
+  rolledHorse = die1 + die2;
 }
 
 //returns random number between 2 and 12
@@ -331,7 +323,6 @@ function resetHorses() {
 //resets border styling, called after race
 function resetBorderStyling() {
   let raceSquares = document.getElementsByClassName("race");
-
   for (let i = 0; i < raceSquares.length; i++) {
     let raceSquare = raceSquares[i];
     raceSquare.style.border = "5px solid white";
@@ -397,19 +388,20 @@ function payoutPot() {
 }
 
 //checks if any players holdings is over the maxHoldings amount and sets winning message and init function for new game
+//consider holding player info in array of objects to make code more dry
 function gameWinCheck() {
   if (p1Holdings > maxHoldings) {
     messageEl.style.color = "green";
     message = "Player 1 Wins the Game!!";
-    setTimeout(init, 7500);
+    setTimeout(init, 6300);
   } else if (p2Holdings > maxHoldings) {
     messageEl.style.color = "green";
     message = "Player 2 Wins the Game!!";
-    setTimeout(init, 7500);
+    setTimeout(init, 6300);
   } else if (p3Holdings > maxHoldings) {
     messageEl.style.color = "green";
     message = "Player 3 Wins the Game!!";
-    setTimeout(init, 7500);
+    setTimeout(init, 6300);
   } else if (p4Holdings > maxHoldings) {
     messageEl.style.color = "green";
     message = "Player 4 Wins the Game!!";
@@ -420,20 +412,20 @@ function gameWinCheck() {
 }
 
 //this function has variable and styling changes unique to race wins; differ from game wins
-function raceWinReset(squareTarget){
-    squareTarget.style.backgroundImage = "url('imgs/checkers.png')";
-    messageEl.style.color = "white";
-    message = 'Click "Draw Horses" to Begin Next Race!';
-    p1HorsesDisplay.style.color = "white";
-    p2HorsesDisplay.style.color = "white";
-    p3HorsesDisplay.style.color = "white";
-    p4HorsesDisplay.style.color = "white";
-    p1Horses = [];
-    p2Horses = [];
-    p3Horses = [];
-    p4Horses = [];
-    p1Count = {};
-    p2Count = {};
-    p3Count = {};
-    p4Count = {};
+function raceWinReset(squareTarget) {
+  squareTarget.style.backgroundImage = "url('imgs/checkers.png')";
+  messageEl.style.color = "white";
+  message = 'Click "Draw Horses" to Begin Next Race!';
+  p1HorsesDisplay.style.color = "white";
+  p2HorsesDisplay.style.color = "white";
+  p3HorsesDisplay.style.color = "white";
+  p4HorsesDisplay.style.color = "white";
+  p1Horses = [];
+  p2Horses = [];
+  p3Horses = [];
+  p4Horses = [];
+  p1Count = {};
+  p2Count = {};
+  p3Count = {};
+  p4Count = {};
 }

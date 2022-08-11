@@ -29,7 +29,7 @@ table {
 th,
 td {
   border: 2px solid white;
-  padding: 5px 15px;
+  padding: 5px 10px;
   font-size: 15px;
 }
 
@@ -90,6 +90,15 @@ p {
 }
 
 .label {
-  padding-top: 15px;
-  font-size: 30px;
+  padding-top: 5px;
+  font-size: 20px;
+  margin:auto;
+  }
+
+input {
+    color: white;
+    width: 80px;
+    font-size: 15px;
+    background-color: #290518;
+    border: none;
 }

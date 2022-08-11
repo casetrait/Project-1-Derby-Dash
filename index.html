@@ -22,30 +22,30 @@
           <tr>
             <th>Name</th>
             <th>Holdings</th>
-            <th>Horses</th>
+            <th>Bet Slip</th>
           </tr>
           <tr>
-            <td id="p1Name">Player 1</td>
+            <td id="p1Name"><input id="p1NameInput" type="text" placeholder="Name 1"></td>
             <td id="p1Holdings">$ 100</td>
             <td id="p1Horses">Draw Horses</td>
           </tr>
           <tr>
-            <td id="p2Name">Player 2</td>
+            <td id="p2Name"><input id="p2NameInput" type="text" placeholder="Name 2"></td>
             <td id="p2Holdings">$ 100</td>
             <td id="p2Horses">Draw Horses</td>
           </tr>
           <tr>
-            <td id="p3Name">Player 3</td>
+            <td id="p3Name"><input id="p3NameInput" type="text" placeholder="Name 3"></td>
             <td id="p3Holdings">$ 100</td>
             <td id="p3Horses">Draw Horses</td>
           </tr>
           <tr>
-            <td id="p4Name">Player 4</td>
+            <td id="p4Name"><input id="p4NameInput" type="text" placeholder="Name 4"></td>
             <td id="p4Holdings">$ 100</td>
             <td id="p4Horses">Draw Horses</td>
           </tr>
         </table>
-        <button class="draw">DRAW HORSES</button>
+        <button class="draw">BEGIN GAME</button>
         <p id="currentPot">Current Pot: <strong ID="pot">$ 0</strong></p>
         <p id="roller">Roller: <strong ID="roller">Player 1</strong></p>
         <button class="roll">ROLL</button>
@@ -56,9 +56,9 @@
         <p>Rolled Horse: <em ID="rolledHorse">2</em></p>
       </div>
       <div class="board">
-        <p class="label">Scratch</p>
+        <p class="label">Scratch ($2)</p>
         <p class="label">Gate</p>
-        <h1 id="message">Click "Draw Horses" to Begin!</h1>
+        <h1 id="message">Enter Names and Click "Begin Game" to Start</h1>
 
         <div class="scratch" id="s2"></div>
         <div class="gate" id="0r2">
