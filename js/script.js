@@ -233,14 +233,14 @@ function zeroCounter(rolledHorse) {
 
 //initialize board for new game
 function init() {
-  message = 'Click "Begin Game" to Start';
+  message = 'Click "Play Again" to Start Another Game';
   raceStatus = "new"
   pot = startingPot;
   p1Holdings = startHoldings;
   p2Holdings = startHoldings;
   p3Holdings = startHoldings;
   p4Holdings = startHoldings;
-  drawButton.innerText = "BEGIN GAME"
+  drawButton.innerText = "PLAY AGAIN"
   p1Horses = [];
   p2Horses = [];
   p3Horses = [];
@@ -392,19 +392,19 @@ function payoutPot() {
 function gameWinCheck() {
   if (p1Holdings > maxHoldings) {
     messageEl.style.color = "green";
-    message = "Player 1 Wins the Game!!";
+    message = `${p1Name} Wins the Game!!`;
     setTimeout(init, 6300);
   } else if (p2Holdings > maxHoldings) {
     messageEl.style.color = "green";
-    message = "Player 2 Wins the Game!!";
+    message = `${p2Name} Wins the Game!!`;
     setTimeout(init, 6300);
   } else if (p3Holdings > maxHoldings) {
     messageEl.style.color = "green";
-    message = "Player 3 Wins the Game!!";
+    message = `${p3Name} Wins the Game!!`;
     setTimeout(init, 6300);
   } else if (p4Holdings > maxHoldings) {
     messageEl.style.color = "green";
-    message = "Player 4 Wins the Game!!";
+    message = `${p4Name} Wins the Game!!`;
     setTimeout(init, 6300);
   } else {
     return;
