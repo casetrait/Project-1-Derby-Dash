@@ -117,12 +117,13 @@ function drawHorses() {
 }
 
 function roll() {
-  //uses race status to determine whether drawing scratch horses or racing and renders results
+  //check raceStatus to determine whether applying scratchRules of raceRules to the roll
   if (raceStatus !== "draw") {
+    rollDice();
     if (raceStatus === "scratch") {
-      rollScratch();
+      scratchRules();
     } else {
-      rollRace();
+      raceRules();
     }
     render();
     setTimeout(render, 6100);
@@ -131,17 +132,16 @@ function roll() {
   }
 }
 
-function rollScratch() {
-  rollDice();
-  //checks if horse isn't already scratched
+function scratchRules() {
+  //checks if horse isn't in the array already
   if (scratchHorses.indexOf(rolledHorse) === -1) {
     scratchHorses.push(rolledHorse);
     zeroCounter(rolledHorse);
     //decrease player holdings by scratchValue * scratchCount
-    p1Holdings = p1Holdings - p1Count[rolledHorse] * scratchValue;
-    p2Holdings = p2Holdings - p2Count[rolledHorse] * scratchValue;
-    p3Holdings = p3Holdings - p3Count[rolledHorse] * scratchValue;
-    p4Holdings = p4Holdings - p4Count[rolledHorse] * scratchValue;
+    p1Holdings -= p1Count[rolledHorse] * scratchValue;
+    p2Holdings -= p2Count[rolledHorse] * scratchValue;
+    p3Holdings -= p3Count[rolledHorse] * scratchValue;
+    p4Holdings -= p4Count[rolledHorse] * scratchValue;
     //increase pot by scratchValue * total held scratch numbers
     pot += scratchValue *
         (p1Count[rolledHorse] +
@@ -165,8 +165,7 @@ function rollScratch() {
   }
 }
 
-function rollRace() {
-  rollDice();
+function raceRules() {
   //check for scratch
   if (scratchHorses.includes(rolledHorse)) {
     payScratch();
@@ -190,21 +189,7 @@ function rollRace() {
       //timeout before resetting state and rendering allows user to observe results
       setTimeout(function () {
         resetHorses();
-        squareTarget.style.backgroundImage = "url('imgs/checkers.png')";
-        messageEl.style.color = "white";
-        message = 'Click "Draw Horses" to Begin Next Race!';
-        p1HorsesDisplay.style.color = "white";
-        p2HorsesDisplay.style.color = "white";
-        p3HorsesDisplay.style.color = "white";
-        p4HorsesDisplay.style.color = "white";
-        p1Horses = [];
-        p2Horses = [];
-        p3Horses = [];
-        p4Horses = [];
-        p1Count = {};
-        p2Count = {};
-        p3Count = {};
-        p4Count = {};
+        raceWinReset(squareTarget);
       }, 6000);
     } else {
       return;
@@ -432,4 +417,23 @@ function gameWinCheck() {
   } else {
     return;
   }
+}
+
+//this function has variable and styling changes unique to race wins; differ from game wins
+function raceWinReset(squareTarget){
+    squareTarget.style.backgroundImage = "url('imgs/checkers.png')";
+    messageEl.style.color = "white";
+    message = 'Click "Draw Horses" to Begin Next Race!';
+    p1HorsesDisplay.style.color = "white";
+    p2HorsesDisplay.style.color = "white";
+    p3HorsesDisplay.style.color = "white";
+    p4HorsesDisplay.style.color = "white";
+    p1Horses = [];
+    p2Horses = [];
+    p3Horses = [];
+    p4Horses = [];
+    p1Count = {};
+    p2Count = {};
+    p3Count = {};
+    p4Count = {};
 }
