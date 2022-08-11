@@ -39,12 +39,12 @@
 const startHoldings = 100;
 const scratchValue = 2;
 const startingPot = 0;
-const maxHoldings = startHoldings * 1.4;
+const maxHoldings = startHoldings * 1.3;
 
 /*----- app's state (variables) -----*/
 
 let playerTurn = "Player 1";
-let message = 'Click "Draw Horses" to Begin!';
+let message = 'Click "Draw Horses" to Begin New Game!';
 let p1Name = "Player 1";
 let p2Name = "Player 2";
 let p3Name = "Player 3";
@@ -125,34 +125,25 @@ function roll() {
       rollRace();
     }
     render();
-    setTimeout(render, 7100);
+    setTimeout(render, 6100);
   } else {
     return;
   }
 }
 
 function rollScratch() {
-  //die roll - consider nesting function
-  die1 = getRandomDieNum();
-  die2 = getRandomDieNum();
-  rolledHorse = die1 + die2;
+  rollDice();
   //checks if horse isn't already scratched
   if (scratchHorses.indexOf(rolledHorse) === -1) {
     scratchHorses.push(rolledHorse);
-    //converts undefined counts into 0 for purpose of math
-    p1Count[rolledHorse] = p1Count[rolledHorse] ? p1Count[rolledHorse] : 0;
-    p2Count[rolledHorse] = p2Count[rolledHorse] ? p2Count[rolledHorse] : 0;
-    p3Count[rolledHorse] = p3Count[rolledHorse] ? p3Count[rolledHorse] : 0;
-    p4Count[rolledHorse] = p4Count[rolledHorse] ? p4Count[rolledHorse] : 0;
+    zeroCounter(rolledHorse);
     //decrease player holdings by scratchValue * scratchCount
     p1Holdings = p1Holdings - p1Count[rolledHorse] * scratchValue;
     p2Holdings = p2Holdings - p2Count[rolledHorse] * scratchValue;
     p3Holdings = p3Holdings - p3Count[rolledHorse] * scratchValue;
     p4Holdings = p4Holdings - p4Count[rolledHorse] * scratchValue;
-    //increase pot by scratchValue * ScratchCount
-    pot =
-      pot +
-      scratchValue *
+    //increase pot by scratchValue * total held scratch numbers
+    pot += scratchValue *
         (p1Count[rolledHorse] +
           p2Count[rolledHorse] +
           p3Count[rolledHorse] +
@@ -175,10 +166,7 @@ function rollScratch() {
 }
 
 function rollRace() {
-  //die roll - consider nesting function
-  die1 = getRandomDieNum();
-  die2 = getRandomDieNum();
-  rolledHorse = die1 + die2;
+  rollDice();
   //check for scratch
   if (scratchHorses.includes(rolledHorse)) {
     payScratch();
@@ -217,7 +205,7 @@ function rollRace() {
         p2Count = {};
         p3Count = {};
         p4Count = {};
-      }, 7000);
+      }, 6000);
     } else {
       return;
     }
@@ -256,9 +244,17 @@ function countPlayerHorses() {
   }
 }
 
+//converts undefined counts into 0 for purpose of math
+function zeroCounter(rolledHorse){
+    p1Count[rolledHorse] = p1Count[rolledHorse] ? p1Count[rolledHorse] : 0;
+    p2Count[rolledHorse] = p2Count[rolledHorse] ? p2Count[rolledHorse] : 0;
+    p3Count[rolledHorse] = p3Count[rolledHorse] ? p3Count[rolledHorse] : 0;
+    p4Count[rolledHorse] = p4Count[rolledHorse] ? p4Count[rolledHorse] : 0;
+}
+
 //initialize board for new game
 function init() {
-  message = 'Click "Draw Horses" to Begin!';
+  message = 'Click "Draw Horses" to Begin New Game!';
   pot = startingPot;
   p1Holdings = startHoldings;
   p2Holdings = startHoldings;
@@ -312,9 +308,11 @@ function render() {
   rolledHorseEl.textContent = Number(die1) + Number(die2);
 }
 
-//returns randum number between 1 and 6
-function getRandomDieNum() {
-  return Math.floor(Math.random() * 6 + 1);
+//computes two random dice numbers between 1 and 6 and sums them
+function rollDice() {
+    die1 = Math.floor(Math.random() * 6 + 1);
+    die2 = Math.floor(Math.random() * 6 + 1);
+    rolledHorse = die1 + die2;
 }
 
 //returns random number between 2 and 12
@@ -392,11 +390,7 @@ function raceWin(squareTarget) {
 }
 
 function payoutPot() {
-  //converts undefined to zeros for pot distibution math
-  p1Count[rolledHorse] = p1Count[rolledHorse] ? p1Count[rolledHorse] : 0;
-  p2Count[rolledHorse] = p2Count[rolledHorse] ? p2Count[rolledHorse] : 0;
-  p3Count[rolledHorse] = p3Count[rolledHorse] ? p3Count[rolledHorse] : 0;
-  p4Count[rolledHorse] = p4Count[rolledHorse] ? p4Count[rolledHorse] : 0;
+  zeroCounter(rolledHorse);
   //determines total winning horses held
   let numWinners =
     p1Count[rolledHorse] +
@@ -434,7 +428,7 @@ function gameWinCheck() {
   } else if (p4Holdings > maxHoldings) {
     messageEl.style.color = "green";
     message = "Player 4 Wins the Game!!";
-    setTimeout(init, 7500);
+    setTimeout(init, 6300);
   } else {
     return;
   }
