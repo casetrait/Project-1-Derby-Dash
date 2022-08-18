@@ -180,7 +180,7 @@ function raceRules() {
   if (scratchHorses.includes(rolledHorse)) {
     payScratch();
     changeTurn();
-    //i not scratch horses move up the track
+    //if not a scratch horse then the horse moves up the track
   } else {
     //cache rolled horse image
     let horseTarget = document.getElementById("h" + rolledHorse);
